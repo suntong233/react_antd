@@ -1,0 +1,43 @@
+@import "@/style/index.scss";
+
+.form {
+	width: 360px;
+	display: flex;
+	flex-direction: column;
+
+	:global(.ant-form) {
+		padding: 20px 20px 0;
+	}
+
+	.bottom {
+		display: flex;
+		flex-direction: row;
+		height: 60px;
+		padding: 0 20px;
+		align-items: center;
+		border-top: 1px solid $gray-2;
+	}
+}
+
+:global(.ant-popover-inner-content) {
+	padding: 0;
+}
+
+.main {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	padding: 10px;
+
+	.total {
+		width: 20px;
+		height: 20px;
+		border-radius: 50%;
+		background-color: $gray-1;
+		margin-left: 15px;
+		color: $blue-6;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
+}

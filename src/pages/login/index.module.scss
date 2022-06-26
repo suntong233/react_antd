@@ -1,0 +1,97 @@
+@import "@/style/index.scss";
+
+.main {
+	height: 100%;
+	display: flex;
+	flex-direction: column;
+	background-color: $gray-2;
+
+	.header {
+		display: flex;
+		flex-direction: row;
+		height: 80px;
+		align-items: center;
+		padding-left: 20px;
+
+		.logo {
+			width: 153px;
+			height: 44px;
+			background: url(../../images/login/logo.png) no-repeat;
+			background-size: 100% 100%;
+		}
+	}
+
+	.body {
+		flex: 1;
+		display: flex;
+		flex-direction: row;
+		align-items: center;
+		justify-content: center;
+
+		.content {
+			width: 1000px;
+			height: 399px;
+			display: flex;
+			flex-direction: row;
+			overflow: hidden;
+			border-radius: 5px;
+			box-shadow: 5px 5px 10px $gray-5;
+
+			.left {
+				flex: 1;
+				background: url(../../images/login/info.jpg) no-repeat;
+				background-size: 100% 100%;
+			}
+
+			.right {
+				width: 400px;
+				background-color: $gray-1;
+				padding: 20px 30px;
+				display: flex;
+				flex-direction: column;
+				justify-content: space-between;
+
+				.welcome {
+					font-size: 24px;
+					font-weight: 600;
+					color: $gray-10;
+					margin-bottom: 20px;
+					text-align: center;
+				}
+			}
+		}
+	}
+
+	.info {
+		height: 60px;
+		display: flex;
+		flex-direction: row;
+		align-items: center;
+		justify-content: center;
+		color: $gray-7;
+	}
+}
+
+.captcha {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+
+	.img {
+		width: 133px;
+		height: 32px;
+	}
+}
+
+.password {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+
+	.forget {
+		width: 133px;
+		text-align: center;
+		cursor: pointer;
+		color: $blue-6;
+	}
+}

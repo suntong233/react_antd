@@ -1,0 +1,35 @@
+@import "@/index.scss";
+
+.main {
+	height: 100%;
+
+	.header {
+		display: flex;
+		flex-direction: row;
+		align-items: center;
+		background-color: $base-color;
+		padding: 0;
+		height: 45px;
+
+		.logo {
+			text-align: center;
+			width: 200px;
+			color: $gray-1;
+			font-size: 18px;
+			letter-spacing: 1px;
+		}
+	}
+
+	.content {
+		height: 100%;
+		overflow: overlay;
+	}
+
+	:global(.ant-layout-sider-trigger) {
+		background-color: $gray-1;
+
+		& > span {
+			color: $gray-10;
+		}
+	}
+}

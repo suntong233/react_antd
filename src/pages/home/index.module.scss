@@ -1,0 +1,9 @@
+@import "@/index.scss";
+
+.main {
+	height: 100%;
+	display: flex;
+	flex-direction: column;
+	overflow: overlay;
+	padding: 20px;
+}

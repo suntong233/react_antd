@@ -1,0 +1,121 @@
+@import "./base.scss";
+
+@mixin border-less(
+	$border-color,
+	$text-color,
+	$background-color,
+	$svg-color: #000000
+) {
+	border: 1px solid $border-color;
+	color: $text-color;
+	background-color: $background-color;
+	box-shadow: none;
+
+	& > span svg {
+		color: $svg-color;
+	}
+
+	& > svg {
+		color: $svg-color;
+	}
+}
+
+.ant-btn {
+	border-radius: $border-radius !important;
+}
+
+.ant-btn-icon-only {
+	padding: 4px 0 !important;
+}
+
+.ant-btn[disabled],
+.ant-btn[disabled]:hover,
+.ant-btn[disabled]:focus,
+.ant-btn[disabled]:active {
+	color: $gray-6 !important;
+	border-color: transparent !important;
+	background: transparent !important;
+	text-shadow: none;
+	box-shadow: none;
+
+	& > span svg {
+		color: $gray-6;
+	}
+
+	& > svg {
+		color: $gray-6;
+	}
+}
+button[class*="safe"] {
+	@include border-less($green-6, $gray-1, $green-6, $gray-1);
+	&:focus {
+		@include border-less($green-6, $gray-1, $green-6, $gray-1);
+	}
+	&:hover {
+		@include border-less($green-6, $gray-1, $green-6, $gray-1);
+	}
+}
+
+button[class*="borderless"] {
+	@include border-less(transparent, $gray-6, $gray-1, $gray-6);
+	&:focus {
+		@include border-less(transparent, $gray-6, $gray-1, $gray-6);
+	}
+	&:hover {
+		@include border-less($gray-1, $gray-6, $gray-1, $gray-6);
+	}
+}
+
+button[class*="borderless-danger"] {
+	@include border-less(transparent, $gray-9, transparent, $red-5);
+	&:focus {
+		@include border-less(transparent, $gray-9, transparent, $red-5);
+	}
+	&:hover {
+		@include border-less($red-1, $red-5, $red-1, $red-5);
+	}
+}
+
+button[class*="borderless-safe"] {
+	@include border-less(transparent, $gray-9, transparent, $green-6);
+	&:focus {
+		@include border-less(transparent, $gray-9, transparent, $green-6);
+	}
+	&:hover {
+		@include border-less($green-1, $green-6, $green-1, $green-6);
+	}
+}
+
+button[class*="borderless-normal"] {
+	@include border-less(transparent, $gray-9, transparent, $blue-6);
+	&:focus {
+		@include border-less(transparent, $gray-9, transparent, $blue-6);
+	}
+	&:hover {
+		@include border-less($blue-1, $blue-6, $blue-1, $blue-6);
+	}
+}
+
+button[class*="borderless-gray"] {
+	@include border-less(transparent, $gray-9, transparent, $gray-6);
+	&:focus {
+		@include border-less(transparent, $gray-9, transparent, $gray-6);
+	}
+	&:hover {
+		@include border-less($gray-1, $gray-6, $gray-1, $gray-6);
+	}
+}
+
+.ant-drawer-body {
+	padding: 0 !important;
+}
+
+.ant-picker-range {
+	display: flex !important;
+}
+
+.ant-form-item-label > label {
+	white-space: pre-wrap !important;
+	height: auto !important;
+	min-height: 32px !important;
+}
