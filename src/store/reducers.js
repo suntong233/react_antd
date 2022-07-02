@@ -11,7 +11,7 @@ const defaultState = {
 	user: { isAdmin: false },
 	data: {},
 	session: {
-		state: "valid",
+		state: "invalid",
 	},
 };
 
@@ -44,6 +44,7 @@ const userReducer = function (state = defaultState.user, action) {
 };
 
 const sessionReducer = (state = defaultState.session, action) => {
+	console.log(action);
 	switch (action.type) {
 		case UPDATE_SESSION: {
 			return {

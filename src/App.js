@@ -12,6 +12,8 @@ const App = () => {
 	const mainElement = useRoutes(mainRouters);
 	const loginElement = useRoutes(loginRouters);
 
+	console.log("sessionState", sessionState);
+
 	const content = useMemo(() => {
 		switch (sessionState) {
 			case "valid": {
