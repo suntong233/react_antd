@@ -1,0 +1,25 @@
+@import "@/index.scss";
+
+.main {
+	height: 100%;
+	display: flex;
+	flex-direction: column;
+
+	.header {
+		height: 60px;
+		background-color: $gray-1;
+		padding-left: 20px;
+		display: flex;
+		flex-direction: row;
+		align-items: center;
+	}
+
+	.content {
+		flex: 1;
+		padding: 0 20px;
+	}
+
+	& > :not(:first-child) {
+		margin-top: 20px;
+	}
+}

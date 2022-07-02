@@ -3,6 +3,7 @@ import { Spin } from "antd";
 import { Navigate } from "react-router-dom";
 
 import { ReactComponent as HomeSvg } from "@/images/menu/home.svg";
+import { ReactComponent as TableSvg } from "@/images/menu/table.svg";
 
 export const routes = [
 	{
@@ -10,6 +11,12 @@ export const routes = [
 		element: lazy(() => import("../home")),
 		icon: <HomeSvg />,
 		title: "首页",
+	},
+	{
+		path: "table",
+		element: lazy(() => import("../table")),
+		icon: <TableSvg />,
+		title: "表格",
 	},
 	{
 		path: "*",

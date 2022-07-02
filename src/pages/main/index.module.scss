@@ -9,13 +9,15 @@
 		align-items: center;
 		background-color: $base-color;
 		padding: 0;
-		height: 45px;
 
 		.logo {
-			text-align: center;
+			text-align: justify;
+			text-justify: distribute-all-lines;
+			text-align-last: justify;
 			width: 200px;
 			color: $gray-1;
 			font-size: 18px;
+			padding: 0 20px;
 			letter-spacing: 1px;
 		}
 	}
