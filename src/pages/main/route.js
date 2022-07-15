@@ -19,6 +19,12 @@ export const routes = [
 		title: "表格",
 	},
 	{
+		path: "test",
+		element: lazy(() => import("../form")),
+		icon: <TableSvg />,
+		title: "表单",
+	},
+	{
 		path: "*",
 		element: <Navigate to="index" />,
 	},
