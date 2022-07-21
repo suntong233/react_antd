@@ -169,21 +169,22 @@ const Main = () => {
                         {
                             tmpData.characters.map((item, i) => {
                                 return (<div key={item.key || i} className={styles.charactersItem}>
-                                        <div className={styles.charactersItemCard}>
-                                            <div className={styles.charactersItemStar}>
-                                                {
-                                                    new Array(item.rarity).fill(item.rarity).map((v,i) => {
-                                                        return <StarFilled className={styles.charactersItemStarDetail} key={i} style={{color: "#ecd825"}} />
-                                                    })
-                                                }
-                                            </div>
-
-                                            <div className={item.actived_constellation_num===0? styles.hide : styles.charactersItemConstellation}>
-                                                {item.actived_constellation_num}                                                
-                                            </div>
-                                            <img alt="" className={styles.charactersItemIcon} src={item.icon}></img>
-                                            <div className={styles.charactersCardLv}>lv{item.level}</div>
+                                    <div style={{"background-color": item.rarity===5? "#B9814E" : "#775D9E"}} className={styles.charactersItemCard}>
+                                        <div className={styles.charactersItemStar}>
+                                            {
+                                                new Array(item.rarity).fill(item.rarity).map((v,i) => {
+                                                    return <StarFilled className={styles.charactersItemStarDetail} key={i} style={{color: "#ecd825"}} />
+                                                })
+                                            }
                                         </div>
+                                        <div className={item.actived_constellation_num===0? styles.hide : styles.charactersItemConstellation}>
+                                            {item.actived_constellation_num}                                                
+                                        </div>
+                                        <img alt="" className={styles.charactersItemEl} src={require(`../../images/genshin/${item.element.toLowerCase()}_35.png`)}></img>
+                                        <img alt="" className={styles.charactersItemIcon} src={item.icon}></img>
+                                        <div className={styles.charactersCardLv}>lv{item.level}</div>
+                                    </div>
+                                    <div className={styles.charactersItemCardName}>{item.name}</div>
                                 </div>)
                             })
                         }
