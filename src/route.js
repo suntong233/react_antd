@@ -1,6 +1,6 @@
-import React, { Suspense, lazy } from "react";
-import { Navigate } from "react-router-dom";
 import { Spin } from "antd";
+import { lazy, Suspense } from "react";
+import { Navigate } from "react-router-dom";
 
 export const routes = [
 	{
@@ -13,6 +13,10 @@ export const loginRoutes = [
 	{
 		path: "/login",
 		element: lazy(() => import("./pages/login")),
+	},
+	{
+		path: "/genshin",
+		element: lazy(() => import("./pages/showGenshin")),
 	},
 	{
 		path: "*",

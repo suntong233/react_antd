@@ -1,5 +1,5 @@
-import React, { Suspense, lazy } from "react";
 import { Spin } from "antd";
+import { lazy, Suspense } from "react";
 import { Navigate } from "react-router-dom";
 
 import { ReactComponent as HomeSvg } from "@/images/menu/home.svg";
@@ -23,6 +23,12 @@ export const routes = [
 		element: lazy(() => import("../form")),
 		icon: <TableSvg />,
 		title: "表单",
+	},
+	{
+		path: "genshin",
+		element: lazy(() => import("../showGenshin")),
+		icon: <TableSvg />,
+		title: "展示",
 	},
 	{
 		path: "*",
