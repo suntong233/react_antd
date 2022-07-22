@@ -169,7 +169,7 @@ const Main = () => {
                         {
                             tmpData.characters.map((item, i) => {
                                 return (<div key={item.key || i} className={styles.charactersItem}>
-                                    <div style={{"background-color": item.rarity===5? "#B9814E" : "#775D9E"}} className={styles.charactersItemCard}>
+                                    <div style={{"backgroundColor": item.rarity===5? "#B9814E" : "#775D9E"}} className={styles.charactersItemCard}>
                                         <div className={styles.charactersItemStar}>
                                             {
                                                 new Array(item.rarity).fill(item.rarity).map((v,i) => {
