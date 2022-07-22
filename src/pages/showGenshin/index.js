@@ -1,5 +1,8 @@
 import { SendOutlined, StarFilled } from "@ant-design/icons";
+import { Image } from "antd";
 import styles from "./index.module.scss";
+
+let ycsz = require("../../images/genshin/原粹树脂.png");
 
 const Main = () => {
     let tmpData = {
@@ -134,9 +137,25 @@ const Main = () => {
                 rarity: 5,   // 星级
             },
             
-        ]
+        ],
+        dailynotes: {
+            dailyMsg: [
+                { icon: ycsz, title: "原粹树脂", msg: "将于1小时后全部恢复", status: "77/160" },
+                { icon: ycsz, title: "原粹树脂", msg: "将于1小时后全部恢复", status: "77/160" },
+                { icon: ycsz, title: "原粹树脂", msg: "将于1小时后全部恢复", status: "77/160" },
+                { icon: ycsz, title: "原粹树脂", msg: "将于1小时后全部恢复", status: "77/160" },
+                { icon: ycsz, title: "原粹树脂", msg: "将于1小时后全部恢复", status: "77/160" },
+            ],
+            dispatch: {
+                limit: "5/5",
+                info: [
+                    { icon:require("../../images/genshin/img/side/胡桃.png"), msg: "剩余探索时间 1小时22分钟"},
+                    { icon:require("../../images/genshin/img/side/胡桃.png"), msg: "剩余探索时间 1小时22分钟"},
+                    { icon:require("../../images/genshin/img/side/胡桃.png"), msg: "剩余探索时间 1小时22分钟"}
+                ]
+            }
+        }   
     }
-
     return (
         <div className={styles.main}>
             <div className={styles.header}>
@@ -189,7 +208,43 @@ const Main = () => {
                             })
                         }
                     </div>
-                
+                </div>
+                <div>
+                    <div className={styles.boxtitle}>
+                        <SendOutlined twoToneColor="#eb2f96"/>
+                        &nbsp;&nbsp;实时便签
+                    </div>
+                    <div id="puppeteerScreenShortDailynotes" className={styles.dailynotes}>
+                        {
+                            tmpData.dailynotes.dailyMsg.map(((item, i) => {
+                                return <div key={i} className={styles.dailynotesCard}>
+                                    <Image src={item.icon} className={styles.dailynotesIcon}/>
+                                    <div className={styles.dailynotesContent}>
+                                        <div className={styles.dailynotesContentTitle}>{item.title}</div>
+                                        <div className={styles.dailynotesContentMsg}>{item.msg}</div>
+                                    </div>
+                                    <div className={styles.dailynotesStatus}>{item.status}</div>
+                                </div>
+                            }))
+                        }
+                        <div className={styles.dispatchContainer}>
+                            <div>
+                                探索派遣限制&nbsp; {" (" + tmpData.dailynotes.dispatch.limit+")"}
+                            </div>
+                            {
+                                tmpData.dailynotes.dispatch.info.map((item,i) => {
+                                    return <div key={i} className={styles.dispatchBox}>
+                                        <div className={styles.dispatchBoximage}>
+                                            <Image src={item.icon} className={styles.dispatchBoximageicon}/>
+                                        </div>
+                                        <div className={styles.dispatchBoxMsg}>
+                                            {item.msg}
+                                        </div>
+                                    </div>
+                                })
+                            }
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
