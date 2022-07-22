@@ -101,7 +101,8 @@
 		text-align: center;
 		border-radius: 0px 4px 0px 4px;
 		position: absolute;
-		font-size: 6px;
+		font-size: 8px;
+		padding: 1px;
 		top: 0;
 		right: 0;
 		color: rgba($color: #fff, $alpha: 0.5);
@@ -114,7 +115,7 @@
 		color: #645f66;
 		font-weight: 800;
 		text-align: center;
-		font-size: 8px;
+		font-size:small;
 	}
 	.charactersItemIcon{
 		width: 100%;
@@ -125,7 +126,103 @@
 		padding: 5px;
 		text-align: center;
 	}
-
+	.dailynotes{
+		width: 400px;
+		background-color: #F0E9DF;
+		padding: 8px;
+	}
+	.dailynotesCard{
+		position: relative;
+		display: flex;
+		overflow: hidden;
+		height: 40px;
+		width: 100%;
+		margin-top: 10px;
+		background-color: #F2F2E8;
+		border: 1px solid #d6d6c8;
+		border-radius: 4px;
+		box-shadow: 3px 0 3px #d6d6c8;
+	}
+	.dailynotesIcon{
+		width: 40px;
+		height: 40px;
+		padding: 10px;
+		border-radius: 50%;
+	}
+	
+	.dailynotesStatus{
+		background-color: #EAE2D7;
+		text-align: center;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		font-size: small;
+		color: #755D45;
+		width: 100px;
+	}
+	.dailynotesContent{
+		padding: 2px;
+		display: flex;
+		flex-direction: column;
+		flex-grow: 1;
+	}
+	.dailynotesContentTitle{
+		color: #62615C;
+		font-size: 10px;
+		flex-grow: 1;
+		padding-top: 4px;
+		display: flex;
+		align-items: center;
+	}
+	.dailynotesContentMsg{
+		color: #C8BCB4;
+		font-size: 8px;
+		padding-bottom: 4px;
+		flex-grow: 1;
+		display: flex;
+		align-items: center;
+	}
+	.dispatchContainer{
+		overflow: hidden;
+		margin-top: 10px;
+		background-color: #f1eadf;
+		padding: 8px;
+		color: #5c5b56;
+		border: 1px solid #d6d6c8;
+		border-radius: 4px;
+		box-shadow: 3px 0 3px #d6d6c8;
+	}
+	.dispatchBox{
+		margin: 6px;
+		padding-left: 10px;
+		background-image: linear-gradient(90deg, #EBE3D8 , #f1eadf 55%);;
+		border-radius: 20px;
+		height: 40px;
+		position: relative;
+		display: flex;
+		align-items: center;
+		overflow: hidden;
+	}
+	.dispatchBoximage{
+		width: 30px;
+		height: 30px;
+		background-color: #fff;
+		border-radius: 50%;
+		box-shadow: 2px 2px 0 #fff;
+		border: 3px solid rgb(255, 178, 91);
+	}
+	.dispatchBoximageicon{
+		width: 35px;
+		height: 35px;
+		position: absolute;
+		top: -27px;
+		left: -6px;
+	}
+	.dispatchBoxMsg{
+		margin-left: 10px;
+		font-size: 10px;
+		color: #b4927b;
+	}
 	& > :not(:first-child) {
 		margin-top: 20px;
 	}
