@@ -4,7 +4,17 @@
 	height: 100%;
 	display: flex;
 	flex-direction: column;
-
+	overflow: auto;
+	::-webkit-scrollbar {
+		background-color: rgba(#000, 0.1);
+	}
+	::-webkit-scrollbar-thumb {
+		background-color: rgba(#ffb24e, 0.8);
+	}
+	.puppeteerScreenShortOverviewList{
+		width: 370px;
+		padding: 10px;
+	}
 	.header {
 		height: 60px;
 		background-color: $gray-1;
@@ -28,11 +38,11 @@
 
 	.bigFont{
 		font-size: 18px;
-		font-weight: 800;
+		font-weight: 600;
 		color: #333;
 	}
 	.smallFont{
-		font-size: 9px;
+		font-size: 11px;
 		font-weight: 100;
 	}
 	.boxtitle{
@@ -105,7 +115,7 @@
 		padding: 1px;
 		top: 0;
 		right: 0;
-		color: rgba($color: #fff, $alpha: 0.5);
+		color: rgba($color: #fff, $alpha: 0.8);
 	}
 	.charactersCardLv{
 		position: absolute;
@@ -223,6 +233,82 @@
 		font-size: 10px;
 		color: #b4927b;
 	}
+
+	.abyss{
+		width: 600px;
+		padding: 10px;
+	}
+	.abyssStartEndTime{
+		color: #8d9292;
+		padding: 3px;
+		font-size: 14px;
+	}
+
+	.abyssDataContainer{
+		overflow: hidden;
+		color: #F5FFFF;
+		border-radius: 8px;
+		padding: 16px;
+		font-size: 12px;
+		width: 100%;
+		background: url("../../images/genshin/img/abyss/bg.png") no-repeat;
+		background-size:cover;
+	}
+	.abyssDataTitle{
+		text-align: center;
+		color: #BDB296;
+		font-size: 18px;
+	}
+	.abyssDataTitle2{
+		color: #c7b892;
+		margin: 10px 0 10px 0;
+		font-size: 12px;
+	}
+
+	.abyssDataBaseInfo{
+		margin: 10px 0 10px 0;
+		position: relative;
+		border-radius: 4px;
+		border: 2px solid #696E74; 
+		box-shadow: 0px 1px 4px #545C60;
+		font-size: 14px;
+		display: flex;
+		align-items: center;
+		background-color: rgba(74, 82, 101, 0.8);
+		padding: 8px;
+		>span {
+			flex-grow: 1;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+		}
+	}
+	.abyssDataReveal{
+		position: relative;
+		display: flex;
+		justify-content: space-evenly;
+	}
+	.abyssDataRevealContainer{
+		position: relative;
+		user-select: none;
+	}
+	.abyssDataStar{
+		position: absolute;
+		width: 20px;
+		height: 20px;
+		top: 50%;
+		transform: translate(50%, -50%);
+		left: -43%;
+	}
+	.abyssDataRevealBox{
+		width: 80px;
+		height: 98px;
+		margin: 5px;
+		position: relative;
+		border-radius: 8px;
+		overflow: hidden;
+	}
+
 	& > :not(:first-child) {
 		margin-top: 20px;
 	}
