@@ -60,6 +60,7 @@ const Main = () => {
     const [role, setRole] = useState({});
     const [dailyNote, setDailyNote] = useState();
     const [abyss, setAbyss] = useState();
+    const [analysisCharacter, setAnalysisCharacter] = useState();
     
 
     
@@ -126,6 +127,12 @@ const Main = () => {
                                         })
                                     }
                                     setDailyNote({...data, dailyMsg});
+                                }
+                            })
+                        } else if (/analysisCharacter/ig.test(eid) && query.avatarId) {
+                            axios.get("http://localhost:5500/analysisCharacter" + search).then(res => {
+                                if(res.data) {
+                                    setAnalysisCharacter(res.data);
                                 }
                             })
                         }
@@ -386,6 +393,102 @@ const Main = () => {
                             : null
                         }
                         
+                    </div>
+                </div>
+                <div>
+                    <div className={styles.boxtitle}>
+                        <SendOutlined twoToneColor="#eb2f96"/>
+                        &nbsp;&nbsp;角色分析
+                    </div>
+                    
+                    <div id="puppeteerScreenShortAnalysis" style={{backgroundImage: `url("${require('../../images/genshin/img/roleDetail/'+(analysisCharacter?.name||'荧')+'1.png')}")`}} className={styles.characterAnalysisContainer}>
+                        {
+                            analysisCharacter? 
+                            <div style={{backgroundImage: `url("${analysisCharacter.avatarDetail.image}")`}} className={styles.characterAnalysisBox}>
+                                <div className={styles.logo}>出自q群:1061498138</div>
+                                <Image className={styles.charactersItemEl2} src={require(`../../images/genshin/${analysisCharacter.element.toLowerCase()}_35.png`)} />
+                                <div className={styles.characterInfoBox}>
+                                    <div className={styles.characterInfoName}>
+                                        {analysisCharacter.name}
+                                    </div>
+                                    <div className={styles.characterInfoDiv}>
+                                        <div>Lv{analysisCharacter.level}</div>
+                                        <div>好感:{analysisCharacter.fetter}</div>
+                                        <div>{analysisCharacter.actived_constellation_num}命</div>
+                                    </div>
+                                    
+                                </div>
+                                <div className={styles.skillContainer}>
+                                    {
+                                        analysisCharacter.skill_list.map((skill, i) => {
+                                            return <div key={skill.id} className={styles.skillBox}>
+                                                <Image className={styles.skillIcon} src={skill.icon} />
+                                                {
+                                                    skill.level_current > 0 ? 
+                                                        <div className={styles.skillLevel}>{skill.level_current}</div>
+                                                    : null
+                                                }
+                                            </div>
+                                        })
+                                    }
+                                </div>
+                                <div className={styles.constellationsContainer}>
+                                    {
+                                        analysisCharacter.avatarDetail.constellations.map((constellation, i) => {
+                                            return <div key={constellation.id} className={styles.constellationBox + `${constellation.is_actived?" "+styles.constellationBoxActive:""}`}>
+                                                <Image className={styles.constellationIcon} src={constellation.icon} />
+                                            </div>
+                                        })
+                                    }
+                                </div>
+                                <div className={styles.weaponContainer}>
+                                    <div className={styles.weaponContainerImg}>
+                                        <Image className={styles.weaponIcon} src={analysisCharacter.avatarDetail.weapon.icon} />
+                                    </div>
+                                    <div className={styles.weaponContainerInfo}>
+                                        <div className={styles.weaponTitle}>
+                                            {analysisCharacter.avatarDetail.weapon.name}
+                                        </div>
+                                        <div className={styles.weaponStar}>
+                                            {
+                                                new Array(analysisCharacter.avatarDetail.weapon.rarity===5? 5 : 4).fill(analysisCharacter.avatarDetail.weapon.rarity).map((v,i) => {
+                                                    return <StarFilled className={styles.charactersItemStarDetail} key={i} style={{color: "#ecd825"}} />
+                                                })
+                                            }
+                                        </div>
+                                        <div className={styles.weaponLevel}>
+                                            <span>Lv{analysisCharacter.avatarDetail.weapon.level}</span>
+                                            <span>精炼{analysisCharacter.avatarDetail.weapon.affix_level}</span>
+                                        </div>
+                                        <div className={styles.weaponLevel2}>
+                                            <span>608</span>
+                                            <span>62.2%暴击</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className={styles.reliquariesContainer}>
+                                        {
+                                            analysisCharacter.avatarDetail.reliquaries.map((relics,i)=>{
+                                                return <div key={relics.id||i} className={styles.reliquariesBox}>
+                                                    <div>
+                                                        <Image className={styles.relicsIcon} src={relics.icon} />
+                                                        {relics.set.name}
+                                                        +{relics.level}
+                                                    </div>
+                                                    <div>主词条: 数值</div>
+                                                    <div>
+                                                        <span>副词条: 数值</span>
+                                                        <span>副词条: 数值</span>
+                                                        <span>副词条: 数值</span>
+                                                        <span>副词条: 数值</span>
+                                                    </div>
+                                                </div>
+                                            })
+                                        }
+                                </div>
+                            </div>
+                            : null
+                        }
                     </div>
                 </div>
             </div>
