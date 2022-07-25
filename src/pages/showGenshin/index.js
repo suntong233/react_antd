@@ -1,11 +1,11 @@
 import { SendOutlined, StarFilled } from "@ant-design/icons";
 import { Image } from "antd";
-import { useLocation } from "react-router-dom";
-import styles from "./index.module.scss";
 import axios from "axios";
-import { useState, useEffect } from "react";
 import moment from "moment";
-import {ReactComponent as StarSvg} from "../../images/genshin/star.svg";
+import { useEffect, useState } from "react";
+import { useLocation } from "react-router-dom";
+import { ReactComponent as StarSvg } from "../../images/genshin/star.svg";
+import styles from "./index.module.scss";
 
 let resinIcon = require("../../images/genshin/dailynote/resinIcon.png");
 let coinIcon = require("../../images/genshin/dailynote/coinIcon.png");
@@ -59,42 +59,7 @@ const Main = () => {
     const [stats, setStats] = useState([]);
     const [role, setRole] = useState({});
     const [dailyNote, setDailyNote] = useState();
-    const [abyss, setAbyss] = useState({
-        "schedule_id": 50, 
-        "total_star": 36, //  得星
-        "is_unlock": true, // 解锁
-        "start_time": "1657915200", //  开始时间
-        "end_time": "1659297599", //  结束时间
-        "total_battle_times": 47, //  战斗次数
-        "total_win_times": 31, //  获胜次数
-        "max_floor": "12-3", //  最深抵达
-        "reveal_rank": [
-            {
-                "avatar_id": 10000052,
-                "avatar_icon": "https://upload-bbs.mihoyo.com/game_record/genshin/character_icon/UI_AvatarIcon_Shougun.png",
-                "value": 31,
-                "rarity": 5
-            },
-            {
-                "avatar_id": 10000025,
-                "avatar_icon": "https://upload-bbs.mihoyo.com/game_record/genshin/character_icon/UI_AvatarIcon_Xingqiu.png",
-                "value": 31,
-                "rarity": 4
-            },
-            {
-                "avatar_id": 10000046,
-                "avatar_icon": "https://upload-bbs.mihoyo.com/game_record/genshin/character_icon/UI_AvatarIcon_Hutao.png",
-                "value": 31,
-                "rarity": 5
-            },
-            {
-                "avatar_id": 10000032,
-                "avatar_icon": "https://upload-bbs.mihoyo.com/game_record/genshin/character_icon/UI_AvatarIcon_Bennett.png",
-                "value": 31,
-                "rarity": 4
-            }
-        ]
-    });
+    const [abyss, setAbyss] = useState();
     
 
     
@@ -134,8 +99,12 @@ const Main = () => {
                                     setStats(Object.entries(stats))
                                     setCharacters(avatars)
                                     if (/abyssInfo/ig.test(eid)) {
-                                        setAbyss(v => {return {...v}}) // todo
-                                        console.log();
+                                        axios.get("http://localhost:5500/abyssInfo" + search).then(res2 => { 
+                                            if (res2.data.success) {
+                                                let data2 = res2.data.data
+                                                setAbyss(JSON.parse(JSON.stringify(data2)))
+                                            }
+                                        })
                                     }
                                 }
                             }
@@ -256,7 +225,7 @@ const Main = () => {
                                                     <Image src={item.avatar_side_icon} className={styles.dispatchBoximageicon}/>
                                                 </div>
                                                 <div className={styles.dispatchBoxMsg}>
-                                                    剩余探索时间 {formatTime(item.remained_time)}
+                                                    {item.status === "Finished"? "已完成" : `剩余探索时间 ${formatTime(item.remained_time)}`}
                                                 </div>
                                             </div>
                                         })
@@ -271,49 +240,152 @@ const Main = () => {
                         <SendOutlined twoToneColor="#eb2f96"/>
                         &nbsp;&nbsp;深境螺旋
                     </div>
-                    <div id="puppeteerScreenShortAbyss" className={styles.abyss}>
-                        <div className={styles.abyssStartEndTime}>
-                            统计周期：{moment(abyss.start_time*1000).format("YYYY.MM.DD")}-{moment(abyss.end_time*1000).format("YYYY-MM-DD")} 
-                        </div>
-                        <div className={styles.abyssDataContainer}>
-                            <div className={styles.abyssDataTitle}>挑战回顾</div>
-                            <div className={styles.abyssDataBaseInfo}>
-                                <span><Image width="26px" src={sixstar}></Image>{abyss.total_star}</span>
-                                <span>最深抵达:{abyss.max_floor}</span>
-                                <span>战斗次数:{abyss.total_battle_times}</span>
-                                <span>获胜次数:{abyss.total_win_times}</span>
+                    <div id="puppeteerScreenShortAbyssInfo" className={styles.abyss}>
+                        {
+                            abyss? 
+                            <div>
+                            <div className={styles.abyssStartEndTime}>
+                                统计周期：{moment(abyss.start_time*1000).format("YYYY.MM.DD")}-{moment(abyss.end_time*1000).format("YYYY-MM-DD")} 
                             </div>
-                            <div className={styles.abyssDataTitle2}>出战次数</div>
-                            <div className={styles.abyssDataReveal}>
-                                {
-                                    abyss.reveal_rank.map((item, i) => {
-                                        let character = characters.find(v => v.id === item.avatar_id)
-                                        return (character? <div key={item.avatar_id || i} className={styles.abyssDataRevealContainer}>
-                                            {
-                                                i!==0? <StarSvg className={styles.abyssDataStar}/> : null
-                                            }
-                                            <div style={{"backgroundColor": character.rarity===5? "#B9814E" : "#775D9E"}} className={styles.abyssDataRevealBox}>
-                                                <div className={styles.charactersItemStar}>
-                                                    {
-                                                        new Array(character.rarity===5? 5 : 4).fill(character.rarity).map((v,i) => {
-                                                            return <StarFilled className={styles.charactersItemStarDetail} key={i} style={{color: "#ecd825"}} />
-                                                        })
-                                                    }
+                            <div className={styles.abyssDataContainer}>
+                                <div className={styles.abyssDataTitle}>挑战回顾</div>
+                                <div className={styles.abyssDataBaseInfo}>
+                                    <span><Image width="26px" src={sixstar}></Image>{abyss.total_star}</span>
+                                    <span>最深抵达：{abyss.max_floor}</span>
+                                    <span>战斗次数：{abyss.total_battle_times}</span>
+                                    <span>获胜次数：{abyss.total_win_times}</span>
+                                </div>
+                                <div className={styles.abyssDataTitle2}>出战次数</div>
+                                <div className={styles.abyssDataReveal}>
+                                    {
+                                        abyss.reveal_rank.map((item, i) => {
+                                            let character = characters.find(v => v.id === item.avatar_id)
+                                            return (character? <div key={item.avatar_id || i} className={styles.abyssDataRevealContainer}>
+                                                {
+                                                    i!==0? <StarSvg className={styles.abyssDataStar}/> : null
+                                                }
+                                                <div style={{"backgroundColor": character.rarity===5? "#B9814E" : "#775D9E"}} className={styles.abyssDataRevealBox}>
+                                                    <div className={styles.charactersItemStar}>
+                                                        {
+                                                            new Array(character.rarity===5? 5 : 4).fill(character.rarity).map((v,i) => {
+                                                                return <StarFilled className={styles.charactersItemStarDetail} key={i} style={{color: "#ecd825"}} />
+                                                            })
+                                                        }
+                                                    </div>
+                                                    <div className={character.actived_constellation_num===0? styles.hide : styles.charactersItemConstellation}>
+                                                        {character.actived_constellation_num}                                                
+                                                    </div>
+                                                    <img alt="" className={styles.charactersItemEl} src={require(`../../images/genshin/${character.element.toLowerCase()}_35.png`)}></img>
+                                                    <img alt="" className={styles.charactersItemIcon} src={character.image}></img>
+                                                    <div className={styles.charactersCardLv}>{item.value}次</div>
                                                 </div>
-                                                <div className={character.actived_constellation_num===0? styles.hide : styles.charactersItemConstellation}>
-                                                    {character.actived_constellation_num}                                                
-                                                </div>
-                                                <img alt="" className={styles.charactersItemEl} src={require(`../../images/genshin/${character.element.toLowerCase()}_35.png`)}></img>
-                                                <img alt="" className={styles.charactersItemIcon} src={character.image}></img>
-                                                <div className={styles.charactersCardLv}>{item.value}次</div>
-                                            </div>
-                                        </div> : null)
+                                            </div> : null)
+                                        })
+                                    }
+                                </div>
+                                <div className={styles.abyssDataTitle2}>战斗数据榜</div>
+                                <div className={styles.abyssDataFightContainer}>
+                                    <div className={styles.abyssDataFightbox}>
+                                        最多击破数：{abyss.defeat_rank[0].value}
+                                        <Image className={styles.avatar_icon} src={abyss.defeat_rank[0].avatar_icon} />
+                                    </div>
+                                    <div className={styles.abyssDataFightbox}>
+                                        最强一击：{abyss.damage_rank[0].value}
+                                        <Image className={styles.avatar_icon} src={abyss.damage_rank[0].avatar_icon} />
+                                    </div>
+                                    <div className={styles.abyssDataFightbox}>
+                                        承受伤害：{abyss.take_damage_rank[0].value}
+                                        <Image className={styles.avatar_icon} src={abyss.take_damage_rank[0].avatar_icon} />
+                                    </div>
+                                    <div className={styles.abyssDataFightbox}>
+                                        元素战技：{abyss.normal_skill_rank[0].value}
+                                        <Image className={styles.avatar_icon} src={abyss.normal_skill_rank[0].avatar_icon} />
+                                    </div>
+                                    <div className={styles.abyssDataFightbox}>
+                                        元素爆发：{abyss.energy_skill_rank[0].value}
+                                        <Image className={styles.avatar_icon} src={abyss.energy_skill_rank[0].avatar_icon} />
+                                    </div>
+                                </div>
+                            </div>
+                            {
+                                abyss.floors.map((item, i) => {
+                                    if(i !== (abyss.floors.length-1)) {
+                                        return null
+                                    }
+                                    let timestamp = 0;
+                                    item.levels.forEach(itemlevek => {
+                                        if(itemlevek.battles[1].timestamp && itemlevek.battles[0].timestamp) {
+                                            timestamp += itemlevek.battles[1].timestamp - itemlevek.battles[0].timestamp
+                                        }
                                     })
-                                }
+                                    return <div key={item.index || i} className={styles.abyssFloorContainer}>
+                                        <div className={styles.abyssFloorContainerInn}>
+                                            <div className={styles.abyssFloorContainerHeader}>
+                                                <div className={styles.abyssFloorContainerHeaderTitle}>{item.index}</div>
+                                                <div className={styles.abyssFloorContainerHeaderTitle2}>
+                                                    深境螺旋第{item.index}层
+                                                    &nbsp;合计{Math.floor(timestamp/60)}分{timestamp%60}秒
+                                                </div>
+                                                <div>
+                                                    <span>
+                                                        <Image width="26px" src={sixstar} />
+                                                    </span>
+                                                    <span>
+                                                        {item.star}/{item.max_star}
+                                                    </span>
+                                                </div>
+                                            </div>
+                                            {
+                                                item.levels.map((level, i2) => {
+                                                    return <div key={level.index || i2} className={styles.abyssFloorLevelContainer}>
+                                                        <div className={styles.abyssFloorLevelHeader}>
+                                                            <div>第{level.index}间</div>
+                                                            <div className={styles.abyssFloorLevelHeaderTimeMsg}>
+                                                                {moment(level.battles[0].timestamp*1000).format("HH:mm:ss")}-
+                                                                {moment(level.battles[1].timestamp*1000).format("HH:mm:ss")}
+                                                                &nbsp;共计{Math.floor((level.battles[1].timestamp-level.battles[0].timestamp)/60)}分钟{(level.battles[1].timestamp-level.battles[0].timestamp)%60}秒
+                                                            </div>
+                                                            <div> <Image width="26px" src={sixstar} /> x {level.star}</div>
+                                                        </div>
+                                                        {
+                                                            level.battles.map(battle => {
+                                                                return <div key={battle.index} className={styles.abyssFloorLevelBattleContainer}>
+                                                                    {
+                                                                        battle.avatars.map(avatar => {
+                                                                            let character = characters.find(v => v.id === avatar.id)
+                                                                            return (character? <div key={avatar.avatar_id || i} className={styles.abyssDataRevealContainer}>
+                                                                                <div style={{"backgroundColor": character.rarity===5? "#B9814E" : "#775D9E"}} className={styles.abyssDataRevealBox}>
+                                                                                    <div className={styles.charactersItemStar}>
+                                                                                        {
+                                                                                            new Array(character.rarity===5? 5 : 4).fill(character.rarity).map((v,i) => {
+                                                                                                return <StarFilled className={styles.charactersItemStarDetail} key={i} style={{color: "#ecd825"}} />
+                                                                                            })
+                                                                                        }
+                                                                                    </div>
+                                                                                    <div className={character.actived_constellation_num===0? styles.hide : styles.charactersItemConstellation}>
+                                                                                        {character.actived_constellation_num}                                                
+                                                                                    </div>
+                                                                                    <img alt="" className={styles.charactersItemEl} src={require(`../../images/genshin/${character.element.toLowerCase()}_35.png`)}></img>
+                                                                                    <img alt="" className={styles.charactersItemIcon} src={character.image}></img>
+                                                                                    <div className={styles.charactersCardLv}>Lv{character.level}</div>
+                                                                                </div>
+                                                                            </div> : null)
+                                                                        })
+                                                                    }
+                                                                </div>
+                                                            })
+                                                        }
+                                                    </div>
+                                                })
+                                            }
+                                        </div>
+                                    </div>
+                                })
+                            }
                             </div>
-                            <div className={styles.abyssDataTitle2}>战斗数据榜</div>
-                            <div></div>
-                        </div>
+                            : null
+                        }
+                        
                     </div>
                 </div>
             </div>

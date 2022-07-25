@@ -309,6 +309,94 @@
 		overflow: hidden;
 	}
 
+	.abyssDataFightContainer{ // 战斗数据榜容器
+		display: flex;
+		flex-wrap: wrap;
+		.abyssDataFightbox{
+			width: 50%;
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+			overflow: hidden;
+			padding-right: 30px;
+		}
+		.avatar_icon{
+			transform: translateY(-5px);
+			width: 30px;
+		}
+	}
+
+	.abyssFloorContainer{
+		border-radius: 4px;
+		position: relative;
+		margin-top: 10px;
+		padding: 2px;
+		color: #F5FFFF;
+		background-color: #202940;
+	}
+	.abyssFloorContainerInn{
+		padding: 10px;
+		border-radius: 4px;
+		border: 2px solid #75a89f;
+	}
+	
+	.abyssFloorContainerHeader{
+		display: flex;
+		align-items: center;
+		padding: 10px 5px 10px 5px;
+		justify-content: space-between;
+		>div {
+			display: flex; 
+			align-items: center;	
+		}
+	}
+
+	.abyssFloorContainerHeaderTitle{
+		border-radius: 50%;
+		width: 30px;
+		height: 30px;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		font-size: 16px;
+		font-weight: 800;
+		color: #353f58;
+		box-sizing: border-box;
+		border: 2px solid rgba(120, 127, 133, 0.5);
+		background-color: rgba(238, 244, 248, 0.8);
+		position: relative;
+	}
+	.abyssFloorContainerHeaderTitle2{
+		font-size: 16px;
+		flex-grow: 1;
+		padding-left: 10px;
+	}
+
+	.abyssFloorLevelContainer {
+		border-top: 0.5px solid #75A89F;
+		margin-top: 5px;
+	}
+	.abyssFloorLevelHeader{
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		padding-top: 4px;
+		padding-bottom: 4px;
+		>div{
+			display: flex;
+			align-items: center;
+		}
+	}
+	.abyssFloorLevelHeaderTimeMsg{
+		color: #C7B892;
+		flex-grow: 1;
+		padding-left: 10px;
+		font-size: 10px;
+	}
+	.abyssFloorLevelBattleContainer{
+		display: flex;
+		justify-content: space-evenly;
+	}
 	& > :not(:first-child) {
 		margin-top: 20px;
 	}
