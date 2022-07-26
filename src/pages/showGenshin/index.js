@@ -468,12 +468,13 @@ const Main = () => {
                                 </div>
                                 <div className={styles.reliquariesContainer}>
                                         {
-                                            analysisCharacter.avatarDetail.reliquaries.map((relics,i)=>{
+                                            analysisCharacter.reliquary_list.map((relics,i)=>{
                                                 return <div key={relics.id||i} className={styles.reliquariesBox}>
                                                     <div>
                                                         <Image className={styles.relicsIcon} src={relics.icon} />
-                                                        {relics.set.name}
-                                                        +{relics.level}
+                                                        {relics.name}
+                                                        +{relics.level_current}
+                                                        {relics.reliquary_level}
                                                     </div>
                                                     <div>主词条: 数值</div>
                                                     <div>
