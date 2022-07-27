@@ -14,6 +14,40 @@ let coinIcon3 = require("../../images/genshin/dailynote/coinIcon3.png");
 let transformerIcon = require("../../images/genshin/dailynote/transformerIcon.png");
 let sixstar = require("../../images/genshin/六角星.png");
 
+let profileAttrEnum = {
+    hurtV: "伤害值",
+    hpBase: "基础生命",
+    hpRate: "生命",
+    hpFixed: "固定生命",
+    atkBase: "基础攻击",
+    atkRate: "攻击",
+    atkFixed: "固定攻击",
+    defBase: "基础防御",
+    defRate: "防御",
+    defFixed: "固定防御",
+    crRate: "暴击率",
+    crDmg: "暴击伤害",
+    charging: "元素充能",
+    reaction: "元素精通",
+    phy: "物理",
+    pyro: "火",
+    hydro: "水",
+    cryo: "冰",
+    electro: "雷",
+    dendro: "草",
+    anemo: "风",
+    geo: "岩",
+    treatment: "治疗加成",
+    betreatment: "被治疗加成",
+    shield: "护盾强效",
+  }
+
+  function addBai(str) {
+    if (/rate|crDmg|charging|treatment/ig.test(str) || ["phy","pyro","hydro","cryo","electro","dendro","anemo","geo","shield"].includes(str)) {
+        return "%"
+    }
+    return ""
+  }
 
 function formatTime(time) {
     let tili_time = (time-0)/60
@@ -129,18 +163,16 @@ const Main = () => {
                                     setDailyNote({...data, dailyMsg});
                                 }
                             })
-                        } else if (/analysisCharacter/ig.test(eid) && query.avatarId) {
+                        } else if (/analysisCharacter/ig.test(eid) && query.aid) {
                             axios.get("http://localhost:5500/analysisCharacter" + search).then(res => {
-                                if(res.data) {
-                                    setAnalysisCharacter(res.data);
+                                if(res.data && res.data.success) {
+                                    console.log(res.data.data);
+                                    setAnalysisCharacter(res.data.data);
                                 }
                             })
                         }
                     }
                 })
-                // if(GenShinInfo.uid) {
-                //     console.log(GenShinInfo.uid);
-                // }
             }
         }
         
@@ -405,7 +437,7 @@ const Main = () => {
                         {
                             analysisCharacter? 
                             <div style={{backgroundImage: `url("${analysisCharacter.avatarDetail.image}")`}} className={styles.characterAnalysisBox}>
-                                <div className={styles.logo}>出自q群:1061498138</div>
+                                <div className={styles.logo}>分析出自q群:1061498138</div>
                                 <Image className={styles.charactersItemEl2} src={require(`../../images/genshin/${analysisCharacter.element.toLowerCase()}_35.png`)} />
                                 <div className={styles.characterInfoBox}>
                                     <div className={styles.characterInfoName}>
@@ -468,20 +500,40 @@ const Main = () => {
                                 </div>
                                 <div className={styles.reliquariesContainer}>
                                         {
-                                            analysisCharacter.reliquary_list.map((relics,i)=>{
+                                            Object.values(analysisCharacter.relics.Reliquary).map((relics,i)=>{
                                                 return <div key={relics.id||i} className={styles.reliquariesBox}>
-                                                    <div>
-                                                        <Image className={styles.relicsIcon} src={relics.icon} />
-                                                        {relics.name}
-                                                        +{relics.level_current}
-                                                        {relics.reliquary_level}
+                                                    <div className={styles.reliquariesTitle}>
+                                                        <div className={styles.reliquariesTitleImage}>
+                                                            <Image className={styles.relicsIcon} src={require("../../images/genshin/relics/icon/"+relics.name+".png")} />
+                                                            <div className={styles.reliquariesLevel}>
+                                                                +{relics.level}
+                                                            </div>
+                                                        </div>
+                                                        <div className={styles.reliquariesTitleInfo}>
+                                                            <div className={styles.reliquariesName}>
+                                                                {relics.name}
+                                                            </div>
+                                                            <div className={styles.weaponStar}>
+                                                                {
+                                                                    new Array(relics.rankLevel===5? 5 : 4).fill(relics.rankLevel).map((v,i) => {
+                                                                        return <StarFilled className={styles.charactersItemStarDetail} key={i} style={{color: "#ecd825"}} />
+                                                                    })
+                                                                }
+                                                            </div>
+                                                            <div className={styles.nowrap}>
+                                                                {profileAttrEnum[relics.main[0]]||relics.main[0]}: {relics.main[1]}{addBai(relics.main[0])}
+                                                            </div>
+                                                        </div>
                                                     </div>
-                                                    <div>主词条: 数值</div>
-                                                    <div>
-                                                        <span>副词条: 数值</span>
-                                                        <span>副词条: 数值</span>
-                                                        <span>副词条: 数值</span>
-                                                        <span>副词条: 数值</span>
+                                                    <div className={styles.reliquariesData}>
+                                                        {
+                                                            Object.entries(relics.attrs).map((ritem, i) => {
+                                                                return <div key={ritem[0]}>
+                                                                    <div>{profileAttrEnum[ritem[0]]||ritem[0]}:</div>
+                                                                    <div>{ritem[1]}{addBai(ritem[0])}</div>
+                                                                </div>
+                                                            })
+                                                        }
                                                     </div>
                                                 </div>
                                             })

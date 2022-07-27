@@ -400,15 +400,15 @@
 	.characterAnalysisContainer{
 		background-repeat: no-repeat;
 		background-size: cover;
-		width: 840px;
-		height: 400px;
+		width: 1260px;
+		height: 600px;
 	}
 	.characterAnalysisBox{
 		position: relative;
 		background-repeat: no-repeat;
 		background-size: 30%;
-		width: 840px;
-		height: 400px;
+		width: 1260px;
+		height: 600px;
 	}
 	.logo{
 		position: absolute;
@@ -538,7 +538,6 @@
 		.weaponContainerInfo{
 			flex-grow: 1;
 			display: flex;
-			overflow: hidden;
 			flex-direction: column;
 			justify-content: space-around;
 			align-items: center;
@@ -548,6 +547,7 @@
 			text-align: center;
 		}
 		.weaponIcon{
+			width: 70px;
 			height: 70px;
 		}
 		.weaponStar{
@@ -586,25 +586,80 @@
 		flex-wrap: wrap;
 		left: 240px;
 		top: 110px;
+		.reliquariesTitle{
+			display: flex;
+			position: relative;
+			flex-wrap: nowrap;
+			overflow: hidden;
+			flex-grow: 1;
+		}
 		.reliquariesBox{
-			margin: 5px 5px 0 0;
+			margin: 5px 15px 15px 0;
 			position: relative;
 			overflow: hidden;
+			display: flex;
+			flex-direction: column;
 			width: 180px;
-			height: 80px;
+			height: 120px;
 			color: #E5E2E2;
 			border-radius: 4px;
 			box-shadow: 0 0 4px rgba(0, 153, 255,0.3);
 			background-color: rgba(10, 44, 82, 0.3);
 		}
+		.reliquariesLevel{
+			color: #fff;
+			background-color: rgba(0,0,0,0.5);
+			padding: 1px 2px 1px 2px;
+			border-radius: 2px;
+			position: absolute;
+			top: 0;
+			left: 0;
+			font-size: small;
+		}
+		.reliquariesData{
+			display: flex;
+			width: 100%;
+			background-color: rgba(28, 43, 77, 0.5);
+			flex-wrap: wrap;
+			>div{
+				width: 50%;
+				text-overflow:ellipsis;
+				font-size: 10px;
+				padding: 0 2px 0 2px;
+				overflow: hidden;
+				display: flex;
+				white-space:nowrap;
+				justify-content: space-between;
+				align-items: center;
+			}
+		}
+		.reliquariesTitleImage{
+			overflow: hidden;
+			display: flex;
+			position: relative;
+			justify-content: center;
+			align-items: center;
+			width: 45%;
+		}
+		.reliquariesTitleInfo{
+			display: flex;
+			flex-direction: column;
+			justify-content: center;
+			align-items: center;
+			overflow: hidden;
+			flex-grow: 1;
+		}
 		.relicsIcon{
-			width: 40px;
+			width: 80px;
 		}
 	}
 	.charactersItemEl2{
 		position: absolute;
 		width: 24px;
 		left: 8px;
+	}
+	.nowrap{
+		white-space: nowrap;
 	}
 	& > :not(:first-child) {
 		margin-top: 20px;
