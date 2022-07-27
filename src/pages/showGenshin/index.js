@@ -493,8 +493,70 @@ const Main = () => {
                                             <span>精炼{analysisCharacter.avatarDetail.weapon.affix_level}</span>
                                         </div>
                                         <div className={styles.weaponLevel2}>
-                                            <span>608</span>
-                                            <span>62.2%暴击</span>
+                                            <span>{analysisCharacter.relics.weaponInfo.main.v}</span>
+                                            <span>{profileAttrEnum[analysisCharacter.relics.weaponInfo.second.k]}:{analysisCharacter.relics.weaponInfo.second.v}{addBai(analysisCharacter.relics.weaponInfo.second.k)}</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className={styles.profileContainer}>
+                                    <div className={styles.fightProfile}>
+                                        <div className={styles.profileContainerTitle}>总面板</div>
+                                        <div className={styles.fightHpDefAtkProfile}>
+                                            <div>
+                                                <div>生命</div>
+                                                <div className={styles.fightValueBox}>
+                                                    <div>
+                                                        {analysisCharacter.relics.fightProfile.hp.toFixed(0)-0}
+                                                    </div>
+                                                    <div className={styles.profileValue}>
+                                                        ({analysisCharacter.relics.fightProfile.hpBase.toFixed(0)-0}+
+                                                        <span className={styles.yellow}>
+                                                            {(analysisCharacter.relics.fightProfile.hp-analysisCharacter.relics.fightProfile.hpBase).toFixed(0)-0}
+                                                        </span>
+                                                        )
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div>
+                                                <div>攻击</div>
+                                                <div className={styles.fightValueBox}>
+                                                    <div>
+                                                        {analysisCharacter.relics.fightProfile.atk.toFixed(0)-0}
+                                                    </div>
+                                                    <div className={styles.profileValue}>
+                                                        ({analysisCharacter.relics.fightProfile.atkBase.toFixed(0)-0}+
+                                                        <span className={styles.yellow}>
+                                                            {(analysisCharacter.relics.fightProfile.atk-analysisCharacter.relics.fightProfile.atkBase).toFixed(0)-0}
+                                                        </span>
+                                                        )
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div>
+                                                <div>防御</div>
+                                                <div className={styles.fightValueBox}>
+                                                    <div>
+                                                        {analysisCharacter.relics.fightProfile.def.toFixed(2)-0}
+                                                    </div>
+                                                    <div className={styles.profileValue}>
+                                                        ({analysisCharacter.relics.fightProfile.defBase.toFixed(2)-0}+
+                                                        <span className={styles.yellow}>
+                                                            {(analysisCharacter.relics.fightProfile.def-analysisCharacter.relics.fightProfile.defBase).toFixed(2)-0}
+                                                        </span>
+                                                        )
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div className={styles.fightProfileContainer}>
+                                            {
+                                                Object.entries(analysisCharacter.relics.fightProfile).filter(v1 => { return !/^hp|^atk|^def|hurt/.test(v1[0])}).map(profile => {
+                                                    return <div key={profile[0]} className={styles.fightProfileItemBox}>
+                                                        <div>{profileAttrEnum[profile[0]]||profile[0]}</div>
+                                                        <div>{profile[1].toFixed(0)}</div>
+                                                    </div>
+                                                })
+                                            }
                                         </div>
                                     </div>
                                 </div>
@@ -529,7 +591,7 @@ const Main = () => {
                                                         {
                                                             Object.entries(relics.attrs).map((ritem, i) => {
                                                                 return <div key={ritem[0]}>
-                                                                    <div>{profileAttrEnum[ritem[0]]||ritem[0]}:</div>
+                                                                    <div>{profileAttrEnum[ritem[0]]||ritem[0]}</div>
                                                                     <div>{ritem[1]}{addBai(ritem[0])}</div>
                                                                 </div>
                                                             })

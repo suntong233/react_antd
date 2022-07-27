@@ -580,6 +580,82 @@
 			}
 		}
 	}
+
+	.profileContainer{
+		display: flex;
+		position: relative;
+		overflow: hidden;
+		width: 770px;
+		height: 80px;
+		color: #E5E2E2;
+		position: absolute;
+		left: 432px;
+		border-radius: 4px;
+		box-shadow: 0 0 1px rgba(197, 208, 216, 0.3);
+		background-color: rgba(0, 0, 0, 0.5);
+		.fightProfile{
+			display: flex;
+			align-items: center;
+		}
+		.profileContainerTitle{
+			writing-mode: vertical-lr;
+			height: 80%;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			letter-spacing: 2px;
+			box-sizing: border-box;
+			border-right: 1px solid #397a7c;
+		}
+		.fightHpDefAtkProfile{
+			width: 120px;
+			height: 100%;
+			display: flex;
+			flex-direction: column;
+			>div{
+				font-size: 10px;
+				padding: 0 2px 0 2px;
+				display: flex;
+				align-items: center;
+				flex-grow: 1;
+				box-sizing: border-box;
+				&:not(:first-child) {
+					border-top: 1px solid rgba(255,255,255,0.5);
+				}
+			}
+		}
+		.fightProfileContainer{
+			display: flex;
+			height: 100%;
+			flex-direction: column;
+			flex-wrap: wrap;
+		}
+		.fightProfileItemBox{
+			width: 80px;
+			overflow: hidden;
+			box-shadow: 0 0 1px #fff;
+			padding: 0 1px 0 1px;
+			height: 20px;
+			font-size: 10px;
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+		}
+		.fightValueBox{
+			font-size: 9px;
+			flex-grow: 1;
+			text-align: right;
+		}
+		.profileValue{
+			font-size: 7px;
+		}
+
+	}
+
+	.yellow{
+		color: rgb(56, 255, 122);
+	}
+
 	.reliquariesContainer{
 		position: absolute;
 		display: flex;
