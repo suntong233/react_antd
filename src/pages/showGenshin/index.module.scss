@@ -486,6 +486,7 @@
 		}
 	}
 
+
 	.constellationsContainer{
 		position: absolute;
 		overflow: hidden;
@@ -734,6 +735,43 @@
 		width: 24px;
 		left: 8px;
 	}
+	.reliPoint{
+		background-color: rgba(0, 153, 68, 0.3);
+		color: #fff;
+		position: absolute;
+		padding: 2px;
+		border-radius: 2px;
+		font-size: 10px;
+		bottom: 0px;
+		right: 0px;
+		z-index: 5;
+	}
+
+	.dmgContainerBy{
+		transform:  translateX(315px);
+	}
+	.dmgContainer{
+		position: absolute;
+		left: 240px;
+		top: 250px;
+		background-color: rgba(0,0,0,0.5);
+		color: rgb(187, 228, 255);
+		width: 300px;
+		font-size: 10px;
+		padding: 4px;
+		border-radius: 4px;
+		>div{
+			display: flex;
+			>div{
+				text-align: center;
+				box-shadow: 0 0 1px #09f;
+				width: 33%;
+				align-items: center;
+				overflow: hidden;
+			}
+		}
+	}
+
 	.nowrap{
 		white-space: nowrap;
 	}

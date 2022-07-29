@@ -95,6 +95,7 @@ const Main = () => {
     const [dailyNote, setDailyNote] = useState();
     const [abyss, setAbyss] = useState();
     const [analysisCharacter, setAnalysisCharacter] = useState();
+    const [analysisCharacterUScuss, setAnalysisCharacterUScuss] = useState();
     
 
     
@@ -166,8 +167,12 @@ const Main = () => {
                         } else if (/analysisCharacter/ig.test(eid) && query.aid) {
                             axios.get("http://localhost:5500/analysisCharacter" + search).then(res => {
                                 if(res.data && res.data.success) {
-                                    console.log(res.data.data);
-                                    setAnalysisCharacter(res.data.data);
+                                    console.log(res.data);
+                                    if (res.data.success) {
+                                        setAnalysisCharacter(res.data.data);
+                                    } else {
+                                        setAnalysisCharacterUScuss(res.data);
+                                    }
                                 }
                             })
                         }
@@ -432,10 +437,9 @@ const Main = () => {
                         <SendOutlined twoToneColor="#eb2f96"/>
                         &nbsp;&nbsp;角色分析
                     </div>
-                    
-                    <div id="puppeteerScreenShortAnalysis" style={{backgroundImage: `url("${require('../../images/genshin/img/roleDetail/'+(analysisCharacter?.name||'荧')+'1.png')}")`}} className={styles.characterAnalysisContainer}>
-                        {
-                            analysisCharacter? 
+                    {
+                        analysisCharacter? 
+                        <div id="puppeteerScreenShortAnalysis" style={{backgroundImage: `url("${require('../../images/genshin/img/roleDetail/'+(analysisCharacter?.name||'荧')+'1.png')}")`}} className={styles.characterAnalysisContainer}>
                             <div style={{backgroundImage: `url("${analysisCharacter.avatarDetail.image}")`}} className={styles.characterAnalysisBox}>
                                 <div className={styles.logo}>分析出自q群:1061498138</div>
                                 <Image className={styles.charactersItemEl2} src={require(`../../images/genshin/${analysisCharacter.element.toLowerCase()}_35.png`)} />
@@ -448,7 +452,6 @@ const Main = () => {
                                         <div>好感:{analysisCharacter.fetter}</div>
                                         <div>{analysisCharacter.actived_constellation_num}命</div>
                                     </div>
-                                    
                                 </div>
                                 <div className={styles.skillContainer}>
                                     {
@@ -566,6 +569,9 @@ const Main = () => {
                                                 return <div key={relics.id||i} className={styles.reliquariesBox}>
                                                     <div className={styles.reliquariesTitle}>
                                                         <div className={styles.reliquariesTitleImage}>
+                                                            <div className={styles.reliPoint}>
+                                                                评分:{Object.values(relics.attrAnalysis).reduce( (a,b) => {return a +( b.point||0)} ,0).toFixed(1)}
+                                                            </div>
                                                             <Image className={styles.relicsIcon} src={require("../../images/genshin/relics/icon/"+relics.name+".png")} />
                                                             <div className={styles.reliquariesLevel}>
                                                                 +{relics.level}
@@ -590,7 +596,7 @@ const Main = () => {
                                                     <div className={styles.reliquariesData}>
                                                         {
                                                             Object.entries(relics.attrs).map((ritem, i) => {
-                                                                return <div key={ritem[0]}>
+                                                                return <div key={ritem[0]} className={relics?.attrAnalysis[ritem[0]]?.use ? styles.yellow : styles.undo}>
                                                                     <div>{profileAttrEnum[ritem[0]]||ritem[0]}</div>
                                                                     <div>{ritem[1]}{addBai(ritem[0])}</div>
                                                                 </div>
@@ -601,10 +607,51 @@ const Main = () => {
                                             })
                                         }
                                 </div>
+                                {
+                                    analysisCharacter.calcDmg?.dmgList ? 
+                                    <div className={styles.dmgContainer}>
+                                        <div>
+                                            <div>伤害计算</div>
+                                            <div>暴击伤害</div>
+                                            <div>平均伤害</div>
+                                        </div>
+                                        {
+                                            analysisCharacter.calcDmg.dmgList.map((dmgInfo, i) => {
+                                                return <div key={i}>
+                                                    <div>{dmgInfo.name}</div>
+                                                    <div>{Math.round(dmgInfo.valueBj)}</div>
+                                                    <div>{Math.round(dmgInfo.valueQW)}</div>
+                                                </div>
+                                            })
+                                        }
+                                    </div>
+                                    : null
+                                }
+                                {
+                                    analysisCharacter.calcDmg?.biye?.dmgList ? 
+                                    <div className={styles.dmgContainer + " " + styles.dmgContainerBy}>
+                                        <div>
+                                            <div>毕业伤害</div>
+                                            <div>暴击伤害</div>
+                                            <div>平均伤害</div>
+                                        </div>
+                                        {
+                                            analysisCharacter.calcDmg.biye.dmgList.map((dmgInfo, i) => {
+                                                return <div key={i}>
+                                                    <div>{dmgInfo.name}</div>
+                                                    <div>{Math.round(dmgInfo.valueBj)}</div>
+                                                    <div>{Math.round(dmgInfo.valueQW)}</div>
+                                                </div>
+                                            })
+                                        }
+                                    </div>
+                                    : null
+                                }
                             </div>
-                            : null
-                        }
-                    </div>
+                        </div>
+                        : <div id="puppeteerScreenShortAnalysis">{analysisCharacterUScuss?.msg||""}</div>
+                    }
+                    
                 </div>
             </div>
         </div>
