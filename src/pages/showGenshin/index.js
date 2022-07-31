@@ -229,7 +229,7 @@ const Main = () => {
                                             {item.actived_constellation_num}                                                
                                         </div>
                                         <img alt="" className={styles.charactersItemEl} src={require(`../../images/genshin/${item.element.toLowerCase()}_35.png`)}></img>
-                                        <img alt="" className={styles.charactersItemIcon} src={item.image}></img>
+                                        <img alt="" className={styles.charactersItemIcon} src={ item.name==="旅行者"? item.image : require(`../../images/genshin/img/role/${item.name}.png`)}></img>
                                         <div className={styles.charactersCardLv}>lv{item.level}</div>
                                     </div>
                                     <div className={styles.charactersItemCardName}>{item.name}</div>
@@ -556,7 +556,7 @@ const Main = () => {
                                                 Object.entries(analysisCharacter.relics.fightProfile).filter(v1 => { return !/^hp|^atk|^def|hurt/.test(v1[0])}).map(profile => {
                                                     return <div key={profile[0]} className={styles.fightProfileItemBox}>
                                                         <div>{profileAttrEnum[profile[0]]||profile[0]}</div>
-                                                        <div>{profile[1].toFixed(0)}</div>
+                                                        <div>{profile[1].toFixed(1)-0}</div>
                                                     </div>
                                                 })
                                             }
