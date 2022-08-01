@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import { ReactComponent as StarSvg } from "../../images/genshin/star.svg";
 import styles from "./index.module.scss";
+import cids from "./ids.js";
 
 let resinIcon = require("../../images/genshin/dailynote/resinIcon.png");
 let coinIcon = require("../../images/genshin/dailynote/coinIcon.png");
@@ -319,7 +320,9 @@ const Main = () => {
                                                         {character.actived_constellation_num}                                                
                                                     </div>
                                                     <img alt="" className={styles.charactersItemEl} src={require(`../../images/genshin/${character.element.toLowerCase()}_35.png`)}></img>
-                                                    <img alt="" className={styles.charactersItemIcon} src={character.image}></img>
+                                                    <img alt="" className={styles.charactersItemIcon}
+                                                        src={cids[character.id].name === "旅行者" || !cids[character.id] ? character.image : require(`../../images/genshin/img/role/${cids[character.id].name}.png`)}
+                                                    ></img>
                                                     <div className={styles.charactersCardLv}>{item.value}次</div>
                                                 </div>
                                             </div> : null)
@@ -409,7 +412,9 @@ const Main = () => {
                                                                                         {character.actived_constellation_num}                                                
                                                                                     </div>
                                                                                     <img alt="" className={styles.charactersItemEl} src={require(`../../images/genshin/${character.element.toLowerCase()}_35.png`)}></img>
-                                                                                    <img alt="" className={styles.charactersItemIcon} src={character.image}></img>
+                                                                                    <img alt="" className={styles.charactersItemIcon}
+                                                                                        src={cids[character.id].name === "旅行者" || !cids[character.id] ? character.image : require(`../../images/genshin/img/role/${cids[character.id].name}.png`)}
+                                                                                    ></img>
                                                                                     <div className={styles.charactersCardLv}>Lv{character.level}</div>
                                                                                 </div>
                                                                             </div> : null)
