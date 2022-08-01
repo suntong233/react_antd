@@ -589,11 +589,13 @@
 		width: 770px;
 		height: 80px;
 		color: #E5E2E2;
-		position: absolute;
 		left: 432px;
 		border-radius: 4px;
 		box-shadow: 0 0 1px rgba(197, 208, 216, 0.3);
 		background-color: rgba(0, 0, 0, 0.5);
+		>:nth-child(1) {
+			width: 60%;
+		}
 		.fightProfile{
 			display: flex;
 			align-items: center;
@@ -632,10 +634,10 @@
 			flex-wrap: wrap;
 		}
 		.fightProfileItemBox{
-			width: 80px;
+			width: 84px;
 			overflow: hidden;
 			box-shadow: 0 0 1px #fff;
-			padding: 0 1px 0 1px;
+			padding: 0 2px 0 2px;
 			height: 20px;
 			font-size: 10px;
 			display: flex;

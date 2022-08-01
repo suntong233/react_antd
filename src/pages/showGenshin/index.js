@@ -284,10 +284,9 @@ const Main = () => {
                         <SendOutlined twoToneColor="#eb2f96"/>
                         &nbsp;&nbsp;深境螺旋
                     </div>
-                    <div id="puppeteerScreenShortAbyssInfo" className={styles.abyss}>
-                        {
-                            abyss? 
-                            <div>
+                    {
+                        (abyss && abyss.max_floor !== "0-0") ? 
+                        <div id="puppeteerScreenShortAbyssInfo" className={styles.abyss}>
                             <div className={styles.abyssStartEndTime}>
                                 统计周期：{moment(abyss.start_time*1000).format("YYYY.MM.DD")}-{moment(abyss.end_time*1000).format("YYYY-MM-DD")} 
                             </div>
@@ -362,7 +361,7 @@ const Main = () => {
                                             timestamp += itemlevek.battles[1].timestamp - itemlevek.battles[0].timestamp
                                         }
                                     })
-                                    return <div key={item.index || i} className={styles.abyssFloorContainer}>
+                                    return <div key={i} className={styles.abyssFloorContainer}>
                                         <div className={styles.abyssFloorContainerInn}>
                                             <div className={styles.abyssFloorContainerHeader}>
                                                 <div className={styles.abyssFloorContainerHeaderTitle}>{item.index}</div>
@@ -381,7 +380,7 @@ const Main = () => {
                                             </div>
                                             {
                                                 item.levels.map((level, i2) => {
-                                                    return <div key={level.index || i2} className={styles.abyssFloorLevelContainer}>
+                                                    return <div key={i2 + "a"} className={styles.abyssFloorLevelContainer}>
                                                         <div className={styles.abyssFloorLevelHeader}>
                                                             <div>第{level.index}间</div>
                                                             <div className={styles.abyssFloorLevelHeaderTimeMsg}>
@@ -392,12 +391,12 @@ const Main = () => {
                                                             <div> <Image width="26px" src={sixstar} /> x {level.star}</div>
                                                         </div>
                                                         {
-                                                            level.battles.map(battle => {
-                                                                return <div key={battle.index} className={styles.abyssFloorLevelBattleContainer}>
+                                                            level.battles.map((battle, ib) => {
+                                                                return <div key={ib} className={styles.abyssFloorLevelBattleContainer}>
                                                                     {
-                                                                        battle.avatars.map(avatar => {
+                                                                        battle.avatars.map((avatar, ic) => {
                                                                             let character = characters.find(v => v.id === avatar.id)
-                                                                            return (character? <div key={avatar.avatar_id || i} className={styles.abyssDataRevealContainer}>
+                                                                            return (character? <div key={ic + "a"} className={styles.abyssDataRevealContainer}>
                                                                                 <div style={{"backgroundColor": character.rarity===5? "#B9814E" : "#775D9E"}} className={styles.abyssDataRevealBox}>
                                                                                     <div className={styles.charactersItemStar}>
                                                                                         {
@@ -426,11 +425,10 @@ const Main = () => {
                                     </div>
                                 })
                             }
-                            </div>
-                            : null
-                        }
-                        
-                    </div>
+                        </div>
+                        : null
+                    }
+                    
                 </div>
                 <div>
                     <div className={styles.boxtitle}>
@@ -559,6 +557,27 @@ const Main = () => {
                                                         <div>{profile[1].toFixed(1)-0}</div>
                                                     </div>
                                                 })
+                                            }
+                                        </div>
+                                    </div>
+                                    <div className={styles.fightProfile}>
+                                        <div className={styles.profileContainerTitle}>圣遗物副词条</div>
+                                        <div className={styles.fightProfileContainer}>
+                                            {
+                                                analysisCharacter?.calcDmg?.now_second? 
+                                                    [...Object.entries(analysisCharacter.calcDmg.now_second).map(profile => {
+                                                        return <div key={profile[0]} className={styles.fightProfileItemBox}>
+                                                            <div>{profileAttrEnum[profile[0]]||profile[0]}</div>
+                                                            <div>{profile[1].toFixed(1)-0}</div>
+                                                        </div>
+                                                    }), <div key="special" className={styles.fightProfileItemBox}>
+                                                        <div>得分</div>
+                                                        <div>
+                                                            {Object.values(analysisCharacter.calcDmg.now_second_point)
+                                                            .reduce( (a,b) => {return a +( b.point||0)} ,0).toFixed(1)}
+                                                        </div>
+                                                    </div>]
+                                                : null
                                             }
                                         </div>
                                     </div>
