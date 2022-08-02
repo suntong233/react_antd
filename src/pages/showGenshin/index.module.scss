@@ -600,16 +600,7 @@
 			display: flex;
 			align-items: center;
 		}
-		.profileContainerTitle{
-			writing-mode: vertical-lr;
-			height: 80%;
-			display: flex;
-			justify-content: center;
-			align-items: center;
-			letter-spacing: 2px;
-			box-sizing: border-box;
-			border-right: 1px solid #397a7c;
-		}
+		
 		.fightHpDefAtkProfile{
 			width: 120px;
 			height: 100%;
@@ -627,23 +618,8 @@
 				}
 			}
 		}
-		.fightProfileContainer{
-			display: flex;
-			height: 100%;
-			flex-direction: column;
-			flex-wrap: wrap;
-		}
-		.fightProfileItemBox{
-			width: 84px;
-			overflow: hidden;
-			box-shadow: 0 0 1px #fff;
-			padding: 0 2px 0 2px;
-			height: 20px;
-			font-size: 10px;
-			display: flex;
-			align-items: center;
-			justify-content: space-between;
-		}
+		
+		
 		.fightValueBox{
 			font-size: 9px;
 			flex-grow: 1;
@@ -654,11 +630,66 @@
 		}
 
 	}
-
+	.fightProfileContainer{
+		display: flex;
+		height: 100%;
+		flex-direction: column;
+		flex-wrap: wrap;
+	}
+	.profileContainerTitle{
+		writing-mode: vertical-lr;
+		height: 80%;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		letter-spacing: 2px;
+		box-sizing: border-box;
+		border-right: 1px solid #397a7c;
+	}
+	.fightProfileItemBox{
+		width: 84px;
+		overflow: hidden;
+		box-shadow: 0 0 1px #fff;
+		padding: 0 2px 0 2px;
+		height: 20px;
+		font-size: 10px;
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+	}
 	.yellow{
 		color: rgb(56, 255, 122);
 	}
-
+	.biyeSecondProfile{
+		position: absolute;
+		left: 550px;
+		height: 330px;
+		overflow: hidden;
+		display: flex;
+		flex-direction: column;
+		top: 250px;
+		background-color: rgba(0,0,0,0.5);
+		color: rgb(187, 228, 255);
+		width: 100px;
+		font-size: 10px;
+		padding: 4px;
+		border-radius: 4px;
+		.biyeSecondProfileTitle{
+			text-align: center;
+			padding: 2px;
+			font-weight: 800;
+			font-size: 14px;
+			border-bottom: 1px solid #fff;
+		}
+		.biyeSecondProfileContainer{
+			display: flex;
+			flex-direction: column;
+		}
+		.biyeSecondProfileBox{
+			display: flex;
+			justify-content: space-between;
+		}
+	}
 	.reliquariesContainer{
 		position: absolute;
 		display: flex;
@@ -749,16 +780,26 @@
 		z-index: 5;
 	}
 
-	.dmgContainerBy{
-		transform:  translateX(315px);
-	}
-	.dmgContainer{
+	.dmgContainerAll{
 		position: absolute;
 		left: 240px;
 		top: 250px;
+		width: 300px;
+		display: flex;
+		overflow: hidden;
+		flex-direction: column;
+		justify-content: space-evenly;
+		height: 330px;
+		>div{
+			height: 50%;
+		}
+	}
+	
+	.dmgContainer{
 		background-color: rgba(0,0,0,0.5);
 		color: rgb(187, 228, 255);
 		width: 300px;
+		height: 98%;
 		font-size: 10px;
 		padding: 4px;
 		border-radius: 4px;
@@ -773,7 +814,18 @@
 			}
 		}
 	}
-
+	.sideContainer{
+		display: flex;
+		position: absolute;
+		width: 40px;
+		overflow: hidden;
+		right: 0;
+		height: 100%;
+		top: 0;
+		background-color: rgba(0,0,0,0.3);
+		flex-direction: column;
+		justify-content: center;
+	}
 	.nowrap{
 		white-space: nowrap;
 	}

@@ -5,8 +5,8 @@ import moment from "moment";
 import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import { ReactComponent as StarSvg } from "../../images/genshin/star.svg";
-import styles from "./index.module.scss";
 import cids from "./ids.js";
+import styles from "./index.module.scss";
 
 let resinIcon = require("../../images/genshin/dailynote/resinIcon.png");
 let coinIcon = require("../../images/genshin/dailynote/coinIcon.png");
@@ -470,6 +470,15 @@ const Main = () => {
                                         })
                                     }
                                 </div>
+                                <div className={styles.sideContainer}>
+                                    {analysisCharacter.avatarIds.map(aiditem => {
+                                        return <div key={aiditem}>
+                                            <Image
+                                                src={require(`../../images/genshin/img/side/${cids[aiditem].name}.png`)}
+                                            ></Image>
+                                        </div>
+                                    })}
+                                </div>
                                 <div className={styles.constellationsContainer}>
                                     {
                                         analysisCharacter.avatarDetail.constellations.map((constellation, i) => {
@@ -631,46 +640,70 @@ const Main = () => {
                                             })
                                         }
                                 </div>
-                                {
-                                    analysisCharacter.calcDmg?.dmgList ? 
-                                    <div className={styles.dmgContainer}>
-                                        <div>
-                                            <div>伤害计算</div>
-                                            <div>暴击伤害</div>
-                                            <div>平均伤害</div>
+                                <div className={styles.dmgContainerAll}>
+                                    <div>
+                                    {
+                                        analysisCharacter.calcDmg?.dmgList ? 
+                                        <div className={styles.dmgContainer}>
+                                            <div>
+                                                <div>伤害计算</div>
+                                                <div>暴击伤害</div>
+                                                <div>平均伤害</div>
+                                            </div>
+                                            {
+                                                analysisCharacter.calcDmg.dmgList.map((dmgInfo, i) => {
+                                                    return <div key={i}>
+                                                        <div>{dmgInfo.name}</div>
+                                                        <div>{Math.round(dmgInfo.valueBj)}</div>
+                                                        <div>{Math.round(dmgInfo.valueQW)}</div>
+                                                    </div>
+                                                })
+                                            }
                                         </div>
+                                        : null
+                                    }
+                                    </div>
+                                    <div>
+                                    {
+                                        analysisCharacter.calcDmg?.biye?.dmgList ? 
+                                        <div className={styles.dmgContainer + " " + styles.dmgContainerBy}>
+                                            <div>
+                                                <div>毕业({Math.floor((analysisCharacter.calcDmg.point/analysisCharacter.calcDmg.biye.point)*100)}分)</div>
+                                                <div>暴击伤害</div>
+                                                <div>平均伤害</div>
+                                            </div>
+                                            {
+                                                analysisCharacter.calcDmg.biye.dmgList.map((dmgInfo, i) => {
+                                                    return <div key={i}>
+                                                        <div>{dmgInfo.name}</div>
+                                                        <div>{Math.round(dmgInfo.valueBj)}</div>
+                                                        <div>{Math.round(dmgInfo.valueQW)}</div>
+                                                    </div>
+                                                })
+                                            }
+                                        </div>
+                                        : null
+                                    } 
+                                    </div>
+                                    
+                                    
+                                </div>
+                                
+                                <div className={styles.biyeSecondProfile}>
+                                    <div className={styles.biyeSecondProfileTitle}>毕业词条</div>
+                                    <div className={styles.biyeSecondProfileContainer}>
                                         {
-                                            analysisCharacter.calcDmg.dmgList.map((dmgInfo, i) => {
-                                                return <div key={i}>
-                                                    <div>{dmgInfo.name}</div>
-                                                    <div>{Math.round(dmgInfo.valueBj)}</div>
-                                                    <div>{Math.round(dmgInfo.valueQW)}</div>
-                                                </div>
-                                            })
+                                            analysisCharacter?.calcDmg?.biye?.profile? 
+                                                Object.entries(analysisCharacter.calcDmg.biye.profile).map(profile => {
+                                                    return <div key={profile[0]} className={styles.biyeSecondProfileBox}>
+                                                        <div>{profileAttrEnum[profile[0]]||profile[0]}</div>
+                                                        <div>{profile[1].toFixed(1)-0}</div>
+                                                    </div>
+                                                })
+                                            : null
                                         }
                                     </div>
-                                    : null
-                                }
-                                {
-                                    analysisCharacter.calcDmg?.biye?.dmgList ? 
-                                    <div className={styles.dmgContainer + " " + styles.dmgContainerBy}>
-                                        <div>
-                                            <div>毕业伤害</div>
-                                            <div>暴击伤害</div>
-                                            <div>平均伤害</div>
-                                        </div>
-                                        {
-                                            analysisCharacter.calcDmg.biye.dmgList.map((dmgInfo, i) => {
-                                                return <div key={i}>
-                                                    <div>{dmgInfo.name}</div>
-                                                    <div>{Math.round(dmgInfo.valueBj)}</div>
-                                                    <div>{Math.round(dmgInfo.valueQW)}</div>
-                                                </div>
-                                            })
-                                        }
-                                    </div>
-                                    : null
-                                }
+                                </div>
                             </div>
                         </div>
                         : <div id="puppeteerScreenShortAnalysis">{analysisCharacterUScuss?.msg||""}</div>
