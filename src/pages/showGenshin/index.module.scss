@@ -61,11 +61,18 @@
 		display: flex;
 		padding: 10px;
 		flex-wrap: wrap;
-		width: 480px;
+		justify-content: space-evenly;
+		width: 800px;
 		background-color: #f5ebde;
 	}
 	.charactersItem{
 		user-select: none;
+	}
+	.charactersDItem{
+		user-select: none;
+		display: flex;
+		margin: 5px;
+		box-shadow: 0 0 4px #333;
 	}
 	.charactersItemCardName{
 		text-align: center;
@@ -107,12 +114,12 @@
 	}
 	.charactersItemConstellation{
 		background-color: rgba(0,0,0,0.7);
-		width: 12px;
 		text-align: center;
 		border-radius: 0px 4px 0px 4px;
 		position: absolute;
-		font-size: 8px;
-		padding: 1px;
+		font-size: 10px;
+		font-weight: 600;
+		padding: 2px;
 		top: 0;
 		right: 0;
 		color: rgba($color: #fff, $alpha: 0.8);

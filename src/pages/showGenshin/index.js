@@ -97,8 +97,9 @@ const Main = () => {
     const [abyss, setAbyss] = useState();
     const [analysisCharacter, setAnalysisCharacter] = useState();
     const [analysisCharacterUScuss, setAnalysisCharacterUScuss] = useState();
+    const [CharacterDetail, setCharacterDetail] = useState();
     
-
+    
     
 
     let {search} = useLocation();
@@ -127,7 +128,7 @@ const Main = () => {
             if(eid && qid) {
                 axios.get("http://localhost:5500/login"+search).then(res => {
                     if(res.data && res.data.uid) {
-                        if (/characters|overviewList|abyssInfo/ig.test(eid)) {
+                        if (/characters|overviewList|abyssInfo/ig.test(eid)) { 
                             const featchData = async () => {
                                 let res = await axios.get("http://localhost:5500/normaldata" + search);
                                 if (res.data.success) {
@@ -176,6 +177,15 @@ const Main = () => {
                                     }
                                 }
                             })
+                        } else if (eid === "characterDetails") {
+                            axios.get("http://localhost:5500/characterDetails" + search).then(res => {
+                                if(res.data && res.data.success) {
+                                    // if (res.data.success) {
+                                        console.log(res.data.data.data);
+                                        setCharacterDetail(res.data.data.data);
+                                    // } 
+                                }
+                            })
                         }
                     }
                 })
@@ -216,6 +226,42 @@ const Main = () => {
                     </div>
                     <div id="puppeteerScreenShortCharacters" className={styles.characters}>
                         {
+                            CharacterDetail?.avatars ?
+                                CharacterDetail.avatars.map((item, i) => {
+                                    return (<div key={item.key || i} className={styles.charactersDItem}>
+                                        <div style={{"backgroundColor": item.rarity===5? "#B9814E" : "#775D9E"}} className={styles.charactersItemCard}>
+                                            <div className={styles.charactersItemStar}>
+                                                {
+                                                    new Array(item.rarity===5? 5 : 4).fill(item.rarity).map((v,i) => {
+                                                        return <StarFilled className={styles.charactersItemStarDetail} key={i} style={{color: "#ecd825"}} />
+                                                    })
+                                                }
+                                            </div>
+                                            <div className={item.actived_constellation_num===0? styles.hide : styles.charactersItemConstellation}>
+                                                {item.actived_constellation_num}                                                
+                                            </div>
+                                            <img alt="" className={styles.charactersItemEl} src={require(`../../images/genshin/${item.element.toLowerCase()}_35.png`)}></img>
+                                            <img alt="" className={styles.charactersItemIcon} src={ item.name==="旅行者"? item.icon : require(`../../images/genshin/img/role/${item.name}.png`)}></img>
+                                            <div className={styles.charactersCardLv}>lv{item.level}</div>
+                                        </div>
+
+                                        <div style={{"backgroundColor": item.weapon.rarity===5? "#B9814E" : "#775D9E"}} className={styles.charactersItemCard}>
+                                            <div className={styles.charactersItemStar}>
+                                                {
+                                                    new Array(item.weapon.rarity===5? 5 : 4).fill(item.weapon.rarity).map((v,i) => {
+                                                        return <StarFilled className={styles.charactersItemStarDetail} key={i} style={{color: "#ecd825"}} />
+                                                    })
+                                                }
+                                            </div>
+                                            <div className={item.weapon.affix_level===0? styles.hide : styles.charactersItemConstellation}>
+                                                {item.weapon.affix_level}                                                
+                                            </div>
+                                            <img alt="" className={styles.charactersItemIcon} src={ item.weapon.name==="旅行者"? item.weapon.icon : require(`../../images/genshin/img/weapon/${item.weapon.name}.png`)}></img>
+                                            <div className={styles.charactersCardLv}>lv{item.weapon.level}</div>
+                                        </div>
+                                    </div>)
+                                })
+                            :
                             characters.map((item, i) => {
                                 return (<div key={item.key || i} className={styles.charactersItem}>
                                     <div style={{"backgroundColor": item.rarity===5? "#B9814E" : "#775D9E"}} className={styles.charactersItemCard}>
