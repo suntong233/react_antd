@@ -416,7 +416,7 @@ const Main = () => {
                                                 <div className={styles.abyssFloorContainerHeaderTitle}>{item.index}</div>
                                                 <div className={styles.abyssFloorContainerHeaderTitle2}>
                                                     深境螺旋第{item.index}层
-                                                    &nbsp;合计{Math.floor(timestamp/60)}分{timestamp%60}秒
+                                                    {/* &nbsp;上半{Math.floor(timestamp/60)}分{timestamp%60}秒 */}
                                                 </div>
                                                 <div>
                                                     <span>
@@ -433,9 +433,9 @@ const Main = () => {
                                                         <div className={styles.abyssFloorLevelHeader}>
                                                             <div>第{level.index}间</div>
                                                             <div className={styles.abyssFloorLevelHeaderTimeMsg}>
-                                                                {moment(level.battles[0].timestamp*1000).format("HH:mm:ss")}-
+                                                                上半入场{moment(level.battles[0].timestamp*1000).format("HH:mm:ss")}-下半入场
                                                                 {moment(level.battles[1].timestamp*1000).format("HH:mm:ss")}
-                                                                &nbsp;共计{Math.floor((level.battles[1].timestamp-level.battles[0].timestamp)/60)}分钟{(level.battles[1].timestamp-level.battles[0].timestamp)%60}秒
+                                                                {/* &nbsp;上半{Math.floor((level.battles[1].timestamp-level.battles[0].timestamp)/60)}分钟{(level.battles[1].timestamp-level.battles[0].timestamp)%60}秒 */}
                                                             </div>
                                                             <div> <Image width="26px" src={sixstar} /> x {level.star}</div>
                                                         </div>
