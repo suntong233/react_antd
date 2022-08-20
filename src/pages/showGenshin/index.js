@@ -404,12 +404,12 @@ const Main = () => {
                                     if(i !== (abyss.floors.length-1)) {
                                         return null
                                     }
-                                    let timestamp = 0;
-                                    item.levels.forEach(itemlevek => {
-                                        if(itemlevek.battles[1].timestamp && itemlevek.battles[0].timestamp) {
-                                            timestamp += itemlevek.battles[1].timestamp - itemlevek.battles[0].timestamp
-                                        }
-                                    })
+                                    // let timestamp = 0;
+                                    // item.levels.forEach(itemlevek => {
+                                    //     if(itemlevek.battles[1].timestamp && itemlevek.battles[0].timestamp) {
+                                    //         timestamp += itemlevek.battles[1].timestamp - itemlevek.battles[0].timestamp
+                                    //     }
+                                    // })
                                     return <div key={i} className={styles.abyssFloorContainer}>
                                         <div className={styles.abyssFloorContainerInn}>
                                             <div className={styles.abyssFloorContainerHeader}>
