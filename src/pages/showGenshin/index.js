@@ -520,6 +520,7 @@ const Main = () => {
                                     {analysisCharacter.avatarIds.map(aiditem => {
                                         return <div key={aiditem}>
                                             <Image
+                                                alt={cids[aiditem].name}
                                                 src={require(`../../images/genshin/img/side/${cids[aiditem].name}.png`)}
                                             ></Image>
                                         </div>
@@ -651,7 +652,7 @@ const Main = () => {
                                                             <div className={styles.reliPoint}>
                                                                 评分:{Object.values(relics.attrAnalysis).reduce( (a,b) => {return a +( b.point||0)} ,0).toFixed(1)}
                                                             </div>
-                                                            <Image className={styles.relicsIcon} src={require("../../images/genshin/relics/icon/"+relics.name+".png")} />
+                                                            <Image className={styles.relicsIcon} alt={relics.name.name} src={require("../../images/genshin/relics/icon/"+relics.name+".png")} />
                                                             <div className={styles.reliquariesLevel}>
                                                                 +{relics.level}
                                                             </div>
