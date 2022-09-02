@@ -404,19 +404,21 @@ const Main = () => {
                                     if(i !== (abyss.floors.length-1)) {
                                         return null
                                     }
-                                    // let timestamp = 0;
-                                    // item.levels.forEach(itemlevek => {
-                                    //     if(itemlevek.battles[1].timestamp && itemlevek.battles[0].timestamp) {
-                                    //         timestamp += itemlevek.battles[1].timestamp - itemlevek.battles[0].timestamp
-                                    //     }
-                                    // })
+                                    let timestamp;
+                                    let end = item.levels[2]?.battles[1]?.timestamp
+                                    let start = item.levels[0]?.battles[0]?.timestamp
+                                    if(start && end && end > start) {
+                                        timestamp = end - start;
+                                    }
                                     return <div key={i} className={styles.abyssFloorContainer}>
                                         <div className={styles.abyssFloorContainerInn}>
                                             <div className={styles.abyssFloorContainerHeader}>
                                                 <div className={styles.abyssFloorContainerHeaderTitle}>{item.index}</div>
                                                 <div className={styles.abyssFloorContainerHeaderTitle2}>
                                                     深境螺旋第{item.index}层
-                                                    {/* &nbsp;上半{Math.floor(timestamp/60)}分{timestamp%60}秒 */}
+                                                    {
+                                                        timestamp? <span>&nbsp;  不包括3下半总耗时 {Math.floor(timestamp/60)}分{timestamp%60}秒</span> : null
+                                                    }
                                                 </div>
                                                 <div>
                                                     <span>
@@ -652,7 +654,9 @@ const Main = () => {
                                                             <div className={styles.reliPoint}>
                                                                 评分:{Object.values(relics.attrAnalysis).reduce( (a,b) => {return a +( b.point||0)} ,0).toFixed(1)}
                                                             </div>
-                                                            <Image className={styles.relicsIcon} alt={relics.name.name} src={require("../../images/genshin/relics/icon/"+relics.name+".png")} />
+                                                            {
+                                                                relics.name!==""? <Image className={styles.relicsIcon} alt={relics.name.name} src={require("../../images/genshin/relics/icon/"+relics.name+".png")} />: null
+                                                            }
                                                             <div className={styles.reliquariesLevel}>
                                                                 +{relics.level}
                                                             </div>
