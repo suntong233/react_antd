@@ -41,6 +41,8 @@ let profileAttrEnum = {
     treatment: "治疗加成",
     betreatment: "被治疗加成",
     shield: "护盾强效",
+    jk: "减抗",
+    jf: "减防",
   }
 
   function addBai(str) {
@@ -746,6 +748,19 @@ const Main = () => {
                                         {
                                             analysisCharacter?.calcDmg?.biye?.profile? 
                                                 Object.entries(analysisCharacter.calcDmg.biye.profile).map(profile => {
+                                                    return <div key={profile[0]} className={styles.biyeSecondProfileBox}>
+                                                        <div>{profileAttrEnum[profile[0]]||profile[0]}</div>
+                                                        <div>{profile[1].toFixed(1)-0}</div>
+                                                    </div>
+                                                })
+                                            : null
+                                        }
+                                    </div>
+                                    <div className={styles.biyeSecondProfileTitle}>吃拐</div>
+                                    <div className={styles.biyeSecondProfileContainer}>
+                                        {
+                                            analysisCharacter?.relics?.buffs? 
+                                                Object.entries(analysisCharacter.relics.buffs).map(profile => {
                                                     return <div key={profile[0]} className={styles.biyeSecondProfileBox}>
                                                         <div>{profileAttrEnum[profile[0]]||profile[0]}</div>
                                                         <div>{profile[1].toFixed(1)-0}</div>
