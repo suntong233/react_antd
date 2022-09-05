@@ -712,6 +712,11 @@ const Main = () => {
                                                     </div>
                                                 })
                                             }
+                                            <div>
+                                                <div>point</div>
+                                                <div></div>
+                                                <div>{analysisCharacter.calcDmg.point.toFixed(0)}</div>
+                                            </div>
                                         </div>
                                         : null
                                     }
@@ -734,6 +739,11 @@ const Main = () => {
                                                     </div>
                                                 })
                                             }
+                                            <div>
+                                                <div>point</div>
+                                                <div></div>
+                                                <div>{analysisCharacter.calcDmg.biye.point.toFixed(0)}</div>
+                                            </div>
                                         </div>
                                         : null
                                     } 
@@ -756,7 +766,7 @@ const Main = () => {
                                             : null
                                         }
                                     </div>
-                                    <div className={styles.biyeSecondProfileTitle}>吃拐</div>
+                                    <div className={styles.biyeSecondProfileTitle}>其他配置</div>
                                     <div className={styles.biyeSecondProfileContainer}>
                                         {
                                             analysisCharacter?.relics?.buffs? 
