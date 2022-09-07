@@ -43,6 +43,7 @@ let profileAttrEnum = {
     shield: "护盾强效",
     jk: "减抗",
     jf: "减防",
+    lv: "敌人等级"
   }
 
   function addBai(str) {
@@ -726,7 +727,7 @@ const Main = () => {
                                         analysisCharacter.calcDmg?.biye?.dmgList ? 
                                         <div className={styles.dmgContainer + " " + styles.dmgContainerBy}>
                                             <div>
-                                                <div>毕业({Math.floor((analysisCharacter.calcDmg.point/analysisCharacter.calcDmg.biye.point)*100)}分)</div>
+                                                <div>毕业率({((analysisCharacter.calcDmg.point/analysisCharacter.calcDmg.biye.point)*100).toFixed(1)}%)</div>
                                                 <div>暴击伤害</div>
                                                 <div>平均伤害</div>
                                             </div>
@@ -753,7 +754,7 @@ const Main = () => {
                                 </div>
                                 
                                 <div className={styles.biyeSecondProfile}>
-                                    <div className={styles.biyeSecondProfileTitle}>毕业词条</div>
+                                    <div className={styles.biyeSecondProfileTitle}>毕业副词条</div>
                                     <div className={styles.biyeSecondProfileContainer}>
                                         {
                                             analysisCharacter?.calcDmg?.biye?.profile? 
