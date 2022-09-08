@@ -495,7 +495,7 @@ const Main = () => {
                         analysisCharacter? 
                         <div id="puppeteerScreenShortAnalysis" style={{backgroundImage: `url("${require('../../images/genshin/img/roleDetail/'+(analysisCharacter?.name||'荧')+'1.png')}")`}} className={styles.characterAnalysisContainer}>
                             <div style={{backgroundImage: `url("${analysisCharacter.avatarDetail.image}")`}} className={styles.characterAnalysisBox}>
-                                <div className={styles.logo}>分析出自q群:1061498138</div>
+                                <div className={styles.logo}>分析出自q群:568756916</div>
                                 <Image className={styles.charactersItemEl2} src={require(`../../images/genshin/${analysisCharacter.element.toLowerCase()}_35.png`)} />
                                 <div className={styles.characterInfoBox}>
                                     <div className={styles.characterInfoName}>
