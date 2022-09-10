@@ -19,12 +19,15 @@ let profileAttrEnum = {
     hurtV: "伤害值",
     hpBase: "基础生命",
     hpRate: "生命",
+    hp: "生命值",
     hpFixed: "固定生命",
     atkBase: "基础攻击",
     atkRate: "攻击",
+    atk: "攻击力",
     atkFixed: "固定攻击",
     defBase: "基础防御",
     defRate: "防御",
+    def: "防御力",
     defFixed: "固定防御",
     crRate: "暴击率",
     crDmg: "暴击伤害",
@@ -761,7 +764,7 @@ const Main = () => {
                                                 Object.entries(analysisCharacter.calcDmg.biye.profile).map(profile => {
                                                     return <div key={profile[0]} className={styles.biyeSecondProfileBox}>
                                                         <div>{profileAttrEnum[profile[0]]||profile[0]}</div>
-                                                        <div>{profile[1].toFixed(1)-0}</div>
+                                                        <div>{profile[1].v.toFixed(1)-0}({profile[1].c.toFixed(0)})</div>
                                                     </div>
                                                 })
                                             : null
@@ -777,6 +780,21 @@ const Main = () => {
                                                         <div>{profile[1].toFixed(1)-0}</div>
                                                     </div>
                                                 })
+                                            : null
+                                        }
+                                    </div>
+                                </div>
+                                <div className={styles.fightProfileContainerBiye}>
+                                    <div className={styles.biyeSecondProfileTitle}>毕业面板</div>
+                                    <div className={styles.fightProfileContainer}>
+                                        {
+                                            analysisCharacter?.calcDmg?.biye?.sfightProfile? 
+                                            Object.entries(analysisCharacter?.calcDmg?.biye?.sfightProfile).filter(v1 => { return !/^hp.|^atk.|^def.|hurt/.test(v1[0])}).map(profile => {
+                                                return <div key={profile[0]} className={styles.fightProfileItemBox}>
+                                                    <div>{profileAttrEnum[profile[0]]||profile[0]}</div>
+                                                    <div>{profile[1].toFixed(1)-0}</div>
+                                                </div>
+                                            })
                                             : null
                                         }
                                     </div>
