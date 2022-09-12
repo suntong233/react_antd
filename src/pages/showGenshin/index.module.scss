@@ -637,7 +637,7 @@
 		}
 
 	}
-	.fightProfileContainerBiye{
+	.fightProfileContainerDangqian{
 		position: absolute;
 		top: 250px;
 		left: 660px;
@@ -649,6 +649,25 @@
 		flex-wrap: wrap;
 		background-color: rgba(0,0,0,0.5);
 		color: rgb(187, 228, 255);
+	}
+	.fightProfileContainerBiye{
+		position: absolute;
+		top: 250px;
+		left: 760px;
+		display: flex;
+		text-align: center;
+		padding: 4px;
+		border-radius: 2px;
+		flex-direction: column;
+		flex-wrap: wrap;
+		background-color: rgba(0,0,0,0.5);
+		color: rgb(187, 228, 255);
+	}
+	.qunhao{
+		position: absolute;
+		right: 80px;
+		bottom: 20px;
+		width: 280px;
 	}
 	.fightProfileContainer{
 		display: flex;

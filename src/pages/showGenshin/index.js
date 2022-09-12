@@ -14,6 +14,7 @@ let taskIcon = require("../../images/genshin/dailynote/taskIcon.png");
 let coinIcon3 = require("../../images/genshin/dailynote/coinIcon3.png");
 let transformerIcon = require("../../images/genshin/dailynote/transformerIcon.png");
 let sixstar = require("../../images/genshin/六角星.png");
+let qunhao = require("../../images/genshin/qunhao.png")
 
 let profileAttrEnum = {
     hurtV: "伤害值",
@@ -784,12 +785,14 @@ const Main = () => {
                                         }
                                     </div>
                                 </div>
-                                <div className={styles.fightProfileContainerBiye}>
-                                    <div className={styles.biyeSecondProfileTitle}>毕业面板</div>
+                                <div className={styles.fightProfileContainerDangqian}>
+                                    <div className={styles.biyeSecondProfileTitle}>当前计算面板</div>
                                     <div className={styles.fightProfileContainer}>
                                         {
-                                            analysisCharacter?.calcDmg?.biye?.sfightProfile? 
-                                            Object.entries(analysisCharacter?.calcDmg?.biye?.sfightProfile).filter(v1 => { return !/^hp.|^atk.|^def.|hurt/.test(v1[0])}).map(profile => {
+                                            analysisCharacter?.calcDmg?.data? 
+                                            Object.entries(analysisCharacter?.calcDmg?.data).filter(v1 => { 
+                                                return ["hp","atk","def","crRate","crDmg","charging","reaction","phy","pyro","hydro","cryo","electro","dendro","anemo","geo","treatment","betreatment","shield"].includes(v1[0])}
+                                                ).map(profile => {
                                                 return <div key={profile[0]} className={styles.fightProfileItemBox}>
                                                     <div>{profileAttrEnum[profile[0]]||profile[0]}</div>
                                                     <div>{profile[1].toFixed(1)-0}</div>
@@ -799,11 +802,34 @@ const Main = () => {
                                         }
                                     </div>
                                 </div>
+                                <div className={styles.fightProfileContainerBiye}>
+                                    <div className={styles.biyeSecondProfileTitle}>毕业计算面板</div>
+                                    <div className={styles.fightProfileContainer}>
+                                        {
+                                            analysisCharacter?.calcDmg?.biye?.data? 
+                                            Object.entries(analysisCharacter?.calcDmg?.biye?.data).filter(v1 => { 
+                                                return ["hp","atk","def","crRate","crDmg","charging","reaction","phy","pyro","hydro","cryo","electro","dendro","anemo","geo","treatment","betreatment","shield"].includes(v1[0])}
+                                                ).map(profile => {
+                                                return <div key={profile[0]} className={styles.fightProfileItemBox}>
+                                                    <div>{profileAttrEnum[profile[0]]||profile[0]}</div>
+                                                    <div>{profile[1].toFixed(1)-0}</div>
+                                                </div>
+                                            })
+                                            : null
+                                        }
+                                    </div>
+                                </div>
+                                {/* <div className={styles.qunhao}>
+                                    <Image
+                                        alt="568756916"
+                                        src={qunhao}
+                                    ></Image>
+                                </div> */}
                             </div>
                         </div>
                         : <div id="puppeteerScreenShortAnalysis">{analysisCharacterUScuss?.msg||""}</div>
                     }
-                    
+                   
                 </div>
             </div>
         </div>
