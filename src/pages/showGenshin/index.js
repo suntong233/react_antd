@@ -14,7 +14,7 @@ let taskIcon = require("../../images/genshin/dailynote/taskIcon.png");
 let coinIcon3 = require("../../images/genshin/dailynote/coinIcon3.png");
 let transformerIcon = require("../../images/genshin/dailynote/transformerIcon.png");
 let sixstar = require("../../images/genshin/六角星.png");
-let qunhao = require("../../images/genshin/qunhao.png")
+// let qunhao = require("../../images/genshin/qunhao.png")
 
 let profileAttrEnum = {
     hurtV: "伤害值",
