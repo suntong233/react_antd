@@ -500,7 +500,7 @@ const Main = () => {
                         <div id="puppeteerScreenShortAnalysis" style={{backgroundImage: `url("${require('../../images/genshin/img/roleDetail/'+(analysisCharacter?.name||'荧')+'1.png')}")`}} className={styles.characterAnalysisContainer}>
                             <div style={{backgroundImage: `url("${analysisCharacter.avatarDetail.image}")`}} className={styles.characterAnalysisBox}>
                                 <div className={styles.logo}>分析出自q群:568756916</div>
-                                <Image className={styles.charactersItemEl2} src={require(`../../images/genshin/${analysisCharacter.element.toLowerCase()}_35.png`)} />
+                                {analysisCharacter.element? <Image className={styles.charactersItemEl2} src={require(`../../images/genshin/${analysisCharacter.element.toLowerCase()}_35.png`)} />: null}
                                 <div className={styles.characterInfoBox}>
                                     <div className={styles.characterInfoName}>
                                         {analysisCharacter.name}
@@ -537,16 +537,18 @@ const Main = () => {
                                 </div>
                                 <div className={styles.constellationsContainer}>
                                     {
+                                        analysisCharacter.avatarDetail.constellations?
                                         analysisCharacter.avatarDetail.constellations.map((constellation, i) => {
                                             return <div key={constellation.id} className={styles.constellationBox + `${constellation.is_actived?" "+styles.constellationBoxActive:""}`}>
                                                 <Image className={styles.constellationIcon} src={constellation.icon} />
                                             </div>
                                         })
+                                        : null
                                     }
                                 </div>
                                 <div className={styles.weaponContainer}>
                                     <div className={styles.weaponContainerImg}>
-                                        <Image className={styles.weaponIcon} src={analysisCharacter.avatarDetail.weapon.icon} />
+                                        {analysisCharacter.avatarDetail?.weapon?.icon? <Image className={styles.weaponIcon} src={analysisCharacter.avatarDetail.weapon.icon} />  : null}
                                     </div>
                                     <div className={styles.weaponContainerInfo}>
                                         <div className={styles.weaponTitle}>
