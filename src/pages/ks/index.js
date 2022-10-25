@@ -142,8 +142,7 @@ const Main = () => {
             })
             let {eid} = query
             if(eid === "FightInfo") {
-                let fuben = decodeURI(query.fuben)
-                console.log(decodeURI(fuben));
+                // let fuben = decodeURI(query.fuben)
                 axios.get("http://localhost:5501/fubenFightInfo" + search).then(res => {
                     if(res.data && res.data.success) {
                         console.log(res.data);
@@ -188,6 +187,7 @@ const Main = () => {
 
 function calcHp(hpInfo) {
     let scale = (hpInfo.now/hpInfo.max)*100;
+    if(scale<0){scale = 0}
     let now = Math.round(hpInfo.now);
     let max = Math.round(hpInfo.max);
     let text = `${now}/${max}`
@@ -270,6 +270,9 @@ function xp2lv(xp) {
 }
 function getImgPath(name) {
     let findP = IMGKeys.find(v => new RegExp(`/${name}.(png|jpg)$`).test(v))
+    if(!findP && /^(.+)\(\d+\)$/.test(name)){
+        findP = IMGKeys.find(v => new RegExp(`/${RegExp.$1.trim()}.(png|jpg)$`).test(v))
+    }
     if(IMGKeys.includes(findP)) {
         return IMG(findP)
     } else {
