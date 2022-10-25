@@ -31,6 +31,12 @@ export const routes = [
 		title: "展示",
 	},
 	{
+		path: "ks",
+		element: lazy(() => import("../ks")),
+		icon: <TableSvg />,
+		title: "ks",
+	},
+	{
 		path: "*",
 		element: <Navigate to="index" />,
 	},

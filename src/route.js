@@ -19,6 +19,10 @@ export const loginRoutes = [
 		element: lazy(() => import("./pages/showGenshin")),
 	},
 	{
+		path: "/ks",
+		element: lazy(() => import("./pages/ks")),
+	},
+	{
 		path: "*",
 		element: <Navigate to="/login" />,
 	},
