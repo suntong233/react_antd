@@ -16,6 +16,7 @@ const Main = () => {
         setFightInfo({
             playerData: {
                 2654073941: {
+                    head:"https://www.baidu.com/img/pc_675fe66eab33abff35a2669768c43d95.png",
                     name: "playerName",
                     key: "playerid",
                     uData: {
@@ -84,9 +85,48 @@ const Main = () => {
             },
             npcData: {
                 npc1: {
+                    head:"测试",
                     name: "npcname",
                     key: "npckey",
-                    uData: {}, // 
+                    uData: {
+                        "name": "利维坦",
+                        "ck": 2890459519,
+                        "race": "liweitan",
+                        "hp": {
+                            "头部": 2430.69733170475,
+                            "胸部": 2475.92765079325,
+                            "腹部": 2305.0367141710003,
+                            "左手": 2451.3254144365,
+                            "右手": 2402.120941723,
+                            "左腿": 2403.445659598,
+                            "右腿": 2475.39776364325
+                        },
+                        "items": {
+                            "利维坦宝珠": 1
+                        },
+                        "equip": {
+                            "腰带": "",
+                            "头部": "",
+                            "盔甲": "",
+                            "背心": "",
+                            "腿部": "",
+                            "鞋子": "",
+                            "武器": ""
+                        },
+                        "shuxin": {
+                            "力量": 50,
+                            "敏捷": 61,
+                            "韧性": 63,
+                            "武士刀": 51,
+                            "军刀": 55,
+                            "砍刀": 62,
+                            "长柄刀": 59,
+                            "钝器": 62,
+                            "重武器": 59,
+                            "攻击": 46,
+                            "防御": 58
+                        }
+                    }, // 
                     def: false, // 
                     taunt: false, // 
                     zb: 50, // 
@@ -120,7 +160,20 @@ const Main = () => {
                 {
                     fightInfo?.playerData ? 
                         <div id="puppeteerScreenShortFightInfo" className={styles.fightInfoContainer}>
-                            {renderFightCard(fightInfo.playerData? fightInfo.playerData[2654073941]:{})}
+                            {
+                                Object.values(fightInfo.playerData).map((item,i) => {
+                                    return <div key={i}>
+                                        {renderFightCard(item)}
+                                    </div>
+                                })
+                            }
+                            {
+                                Object.values(fightInfo.npcData).map((item,i) => {
+                                    return <div key={i}>
+                                        {renderFightCard(item)}
+                                    </div>
+                                })
+                            }
                         </div>
                     : null
                 }
