@@ -38,8 +38,11 @@
 
 	.fightInfoContainer{
 		width: 900px;
+		display: flex;
+		justify-content: flex-start;
 	}
 	.fightInfoCard{
+		margin-left: 5px;
 		background-color: #fff;
 		width: 280px;
 		height: 200px;
@@ -95,7 +98,6 @@
 				display: flex;
 				justify-content: center;
 				align-items: center;
-				background-color: #fff;
 				overflow: hidden;
 				>img{
 					width: 100%;
