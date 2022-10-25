@@ -35,4 +35,102 @@
 		background-color: #fff;
 		padding: 20px;
 	}
+
+	.fightInfoContainer{
+		width: 900px;
+	}
+	.fightInfoCard{
+		background-color: #fff;
+		width: 280px;
+		height: 200px;
+		border-radius: 4px;
+		display: flex;
+		justify-content: space-around;
+		overflow: hidden;
+		box-shadow: 0 0 2px #666;
+	}
+	.fightInfoHpBox{ // 
+		width: 120px;
+		display: flex;
+		flex-direction: column;
+		justify-content: space-around;
+		padding: 0 3px;
+		background-color: rgb(135, 255, 183);
+		.fightInfoHpBoxBuwei{
+			position: relative;
+			overflow: hidden;
+			height: 20px;
+			box-shadow:  0 0 2px #999;
+			width: 100%;
+			background-color: rgb(81, 241, 185);
+			.fightInfoHpBoxBuweihp{
+				position: absolute;
+				left: 0;
+				top: 0;
+				background-color: rgb(197, 246, 203);
+				height: 100%;
+				width: 100%;
+			}
+			.fightInfoHpBoxBuweihpFont{
+				position: absolute;
+				width: 100%;
+				height: 100%;
+				text-align: center;
+				color: #fff;
+				font-size: 13px;
+			}
+		}
+	}
+	
+	.fightInfoCardLeftBox{
+		flex: 1;
+		background-color: rgb(167, 165, 141);
+		display: flex;
+		flex-direction: column;
+		.fightInfoCardLeftBoxBaseInfo{
+			display: flex;
+			.fightInfoCardLeftBoxBaseInfoHeadIcon{
+				width: 80px;
+				height: 80px;
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				background-color: #fff;
+				overflow: hidden;
+				>img{
+					width: 100%;
+				}
+			}
+			.fightInfoCardLeftBoxBaseInfoHeadFontBox{
+				padding: 1px;
+				flex: 1;
+				font-size: 12px;
+				color: #fff;
+				justify-content: space-between;
+				>div{
+					padding: 0 2px;
+					width: 100%;
+					overflow: hidden;
+					white-space: nowrap;
+				}
+			}
+		}
+		.fightInfoCardLeftBoxEquipBox{
+			color: #fff;
+			font-size: 10px;
+			width: 100%;
+			justify-content: space-evenly;
+		}
+		.fightInfoCardLeftBoxEquipIcon{
+			background-color: #14b361;
+			float: left;
+			color: #fff;
+			font-size: 10px;
+			padding: 1px 2px;
+			border-radius: 2px;
+			overflow: hidden;
+			white-space: nowrap;
+			max-width: 100px;
+		}
+	}
 }
