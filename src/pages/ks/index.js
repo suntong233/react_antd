@@ -1,5 +1,5 @@
 // import { Image } from "antd";
-// import axios from "axios";
+import axios from "axios";
 // import moment from "moment";
 import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
@@ -140,13 +140,16 @@ const Main = () => {
                 let [key, value] = v.split("=");
                 query[key] = value
             })
-            let {eid, qid} = query
-            if(eid && qid) {
-                // axios.get("http://localhost:5500/login"+search).then(res => {
-                //     if(res.data && res.data.uid) {
-                        
-                //     }
-                // })
+            let {eid} = query
+            if(eid === "FightInfo") {
+                let fuben = decodeURI(query.fuben)
+                console.log(decodeURI(fuben));
+                axios.get("http://localhost:5501/fubenFightInfo" + search).then(res => {
+                    if(res.data && res.data.success) {
+                        console.log(res.data);
+                        setFightInfo(res.data.data);
+                    }
+                })
             }
         }
     }, [search]) 
