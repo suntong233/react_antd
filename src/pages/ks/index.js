@@ -6,6 +6,7 @@ import { useLocation } from "react-router-dom";
 import styles from "./index.module.scss";
 let IMG = require.context("../../images/ks", true, /\.png$|\.jpg$/);
 let IMGKeys = IMG.keys();
+
 const Main = () => {
     const [fightInfo, setFightInfo] = useState({});
 
@@ -60,7 +61,60 @@ const Main = () => {
                     : null
                 }
                 <div id="puppeteerScreenShortCharacterInfo" className={styles.characterContainer}>
-
+                    <div className={styles.characterLeftContainer}></div>
+                    <div className={styles.characterEquipContainer}>
+                        {/* <div className={styles.testimgbox + " " + styles.imgbox}>
+                            <img alt="" src={getImgPath("head")} className={styles.img}></img>
+                        </div> */}
+                        <div className={styles.characterEquipCard1}>
+                            <div className={styles.characterEquipIcon + " " + styles.imgbox}>
+                                <img alt="" src={getImgPath("武士头盔(杰作)")}></img>
+                            </div>
+                            <div className={styles.characterEquipInfo}>
+                                测试文字信息
+                            </div>
+                        </div>
+                        <div className={styles.characterEquipCard1}>
+                            <div className={styles.characterEquipIcon + " " + styles.imgbox}>
+                                <img alt="" src={getImgPath("黑色链甲(杰作)")}></img>
+                            </div>
+                            <div className={styles.characterEquipInfo}>
+                                测试文字信息
+                            </div>
+                        </div>
+                        <div className={styles.characterEquipCard2}>
+                            <div className={styles.characterEquipIcon + " " + styles.imgbox}>
+                                <img alt="" src={getImgPath("武士盔甲(杰作)")}></img>
+                            </div>
+                            <div className={styles.characterEquipInfo}>
+                            测试文字信息
+                            </div>
+                        </div>
+                        <div className={styles.characterEquipCard2}>
+                            <div className={styles.characterEquipIcon + " " + styles.imgbox}>
+                                <img alt="" src={getImgPath("武士腿铠(杰作)")}></img>
+                            </div>
+                            <div className={styles.characterEquipInfo}>
+                            测试文字信息
+                            </div>
+                        </div>
+                        <div className={styles.characterEquipCard1}>
+                            <div className={styles.characterEquipIcon + " " + styles.imgbox}>
+                                <img alt="" src={getImgPath("武士靴(杰作)")}></img>
+                            </div>
+                            <div className={styles.characterEquipInfo}>
+                            测试文字信息
+                            </div>
+                        </div>
+                        <div className={styles.characterEquipCard3}>
+                            <div className={styles.characterEquipIcon2 + " " + styles.imgbox}>
+                                <img alt="" src={getImgPath("落日(名刃)")}></img>
+                            </div>
+                            <div className={styles.characterEquipInfo}>
+                            落日(名刃)
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -151,9 +205,9 @@ function xp2lv(xp) {
     return Math.floor(xp ** 0.28 / 0.48)
 }
 function getImgPath(name) {
-    let findP = IMGKeys.find(v => new RegExp(`/${name}.(png|jpg)$`).test(v))
-    if(!findP && /^(.+)\(\d+\)$/.test(name)){
-        findP = IMGKeys.find(v => new RegExp(`/${RegExp.$1.trim()}.(png|jpg)$`).test(v))
+    let findP = IMGKeys.find(v => v.split("/").pop().split(".")[0] === name )
+    if(!findP && /^(.+)\(.+\)$/.test(name)){
+        findP = IMGKeys.find(v => v.split("/").pop().split(".")[0] === RegExp.$1.trim())
     }
     if(IMGKeys.includes(findP)) {
         return IMG(findP)
