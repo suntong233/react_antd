@@ -8,7 +8,6 @@ let IMG = require.context("../../images/ks", true, /\.png$|\.jpg$/);
 let IMGKeys = IMG.keys();
 const Main = () => {
     const [fightInfo, setFightInfo] = useState({});
-    
 
     let {search} = useLocation();
 
@@ -60,7 +59,9 @@ const Main = () => {
                         </div>
                     : null
                 }
-                
+                <div id="puppeteerScreenShortCharacterInfo" className={styles.characterContainer}>
+
+                </div>
             </div>
         </div>
     )
