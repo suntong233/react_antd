@@ -182,6 +182,8 @@ const Main = () => {
                                     } else {
                                         setAnalysisCharacterUScuss(res.data);
                                     }
+                                } else {
+                                    console.log(res.data);
                                 }
                             })
                         } else if (eid === "characterDetails") {
@@ -194,6 +196,8 @@ const Main = () => {
                                 }
                             })
                         }
+                    } else {
+                        console.log("登录失败");
                     }
                 })
             }
