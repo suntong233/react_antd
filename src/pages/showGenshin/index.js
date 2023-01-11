@@ -179,10 +179,9 @@ const Main = () => {
                                     console.log(res.data);
                                     if (res.data.success) {
                                         setAnalysisCharacter(res.data.data);
-                                    } else {
-                                        setAnalysisCharacterUScuss(res.data);
                                     }
                                 } else {
+                                    setAnalysisCharacterUScuss(res.data);
                                     console.log(res.data);
                                 }
                             })
