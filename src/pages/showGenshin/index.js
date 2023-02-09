@@ -7,7 +7,8 @@ import { useLocation } from "react-router-dom";
 import { ReactComponent as StarSvg } from "../../images/genshin/star.svg";
 import cids from "./ids.js";
 import styles from "./index.module.scss";
-
+let CharacterImg = require.context("../../images/genshin/img/roleshow/character", true, /\.png$|\.jpg$|\.webp$/);
+let CharacterIMGKeys = CharacterImg.keys();
 let resinIcon = require("../../images/genshin/dailynote/resinIcon.png");
 let coinIcon = require("../../images/genshin/dailynote/coinIcon.png");
 let taskIcon = require("../../images/genshin/dailynote/taskIcon.png");
@@ -176,8 +177,14 @@ const Main = () => {
                         } else if (/analysisCharacter/ig.test(eid) && query.aid) {
                             axios.get("http://localhost:5500/analysisCharacter" + search).then(res => {
                                 if(res.data && res.data.success) {
-                                    console.log(res.data);
+                                    console.log(res.data.data);
                                     if (res.data.success) {
+                                        if(!res.data.data.name) {
+                                            if(res.data.data.avatarDetail.id && cids[res.data.data.avatarDetail.id]) {
+                                                res.data.data.name = cids[res.data.data.avatarDetail.id].name
+                                            }
+                                            res.data.data.avatarDetail.weapon.rarity = res.data.data.avatarDetail.weapon.star
+                                        }
                                         setAnalysisCharacter(res.data.data);
                                     }
                                 } else {
@@ -501,7 +508,7 @@ const Main = () => {
                     {
                         analysisCharacter? 
                         <div id="puppeteerScreenShortAnalysis" style={{backgroundImage: `url("${require('../../images/genshin/img/roleDetail/'+(analysisCharacter?.name||'荧')+'1.png')}")`}} className={styles.characterAnalysisContainer}>
-                            <div style={{backgroundImage: `url("${analysisCharacter.avatarDetail.image}")`}} className={styles.characterAnalysisBox}>
+                            <div style={{backgroundImage: `url("${analysisCharacter.avatarDetail.image|| getImgPath(analysisCharacter.name, "splash")}")`}} className={analysisCharacter.avatarDetail.image? styles.characterAnalysisBox:styles.characterAnalysisBox2}>
                                 <div className={styles.logo}>分析出自q群:568756916</div>
                                 {analysisCharacter.element? <Image className={styles.charactersItemEl2} src={require(`../../images/genshin/${analysisCharacter.element.toLowerCase()}_35.png`)} />: null}
                                 <div className={styles.characterInfoBox}>
@@ -509,7 +516,7 @@ const Main = () => {
                                         {analysisCharacter.name}
                                     </div>
                                     <div className={styles.characterInfoDiv}>
-                                        <div>Lv{analysisCharacter.level}</div>
+                                        <div>Lv{analysisCharacter.level||analysisCharacter.avatarDetail.level}</div>
                                         <div>好感:{analysisCharacter.fetter}</div>
                                         <div>{analysisCharacter.actived_constellation_num}命</div>
                                     </div>
@@ -518,7 +525,7 @@ const Main = () => {
                                     {
                                         analysisCharacter.skill_list.map((skill, i) => {
                                             return <div key={skill.id} className={styles.skillBox}>
-                                                <Image className={styles.skillIcon} src={skill.icon} />
+                                                <Image className={styles.skillIcon} src={getImgPath(analysisCharacter.name, `passive-${i}`)} />
                                                 {
                                                     skill.level_current > 0 ? 
                                                         <div className={styles.skillLevel}>{skill.level_current}</div>
@@ -551,7 +558,14 @@ const Main = () => {
                                 </div>
                                 <div className={styles.weaponContainer}>
                                     <div className={styles.weaponContainerImg}>
-                                        {analysisCharacter.avatarDetail?.weapon?.icon? <Image className={styles.weaponIcon} src={analysisCharacter.avatarDetail.weapon.icon} />  : null}
+                                        {
+                                            analysisCharacter.avatarDetail?.weapon?.icon? 
+                                            <Image className={styles.weaponIcon} src={analysisCharacter.avatarDetail.weapon.icon} />  
+                                            : <Image
+                                                className={styles.weaponIcon}
+                                                src={require(`../../images/genshin/img/weapon/${analysisCharacter.avatarDetail.weapon.name}.png`)}
+                                            ></Image>
+                                        }
                                     </div>
                                     <div className={styles.weaponContainerInfo}>
                                         <div className={styles.weaponTitle}>
@@ -566,7 +580,7 @@ const Main = () => {
                                         </div>
                                         <div className={styles.weaponLevel}>
                                             <span>Lv{analysisCharacter.avatarDetail.weapon.level}</span>
-                                            <span>精炼{analysisCharacter.avatarDetail.weapon.affix_level}</span>
+                                            <span>精炼{analysisCharacter.avatarDetail.weapon.affix_level || analysisCharacter.avatarDetail.weapon.affix}</span>
                                         </div>
                                         <div className={styles.weaponLevel2}>
                                             <span>{analysisCharacter.relics.weaponInfo.main.v}</span>
@@ -839,6 +853,12 @@ const Main = () => {
             </div>
         </div>
     )
+}
+function getImgPath(name, img) {
+    let findP = CharacterIMGKeys.find(v => v.includes(name)&&(v.split("/").pop().split(".")[0] === img) )
+    if(CharacterIMGKeys.includes(findP)) {
+        return CharacterImg(findP)
+    }
 }
 
 export default Main;

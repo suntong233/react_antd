@@ -413,7 +413,17 @@
 	.characterAnalysisBox{
 		position: relative;
 		background-repeat: no-repeat;
-		background-size: 30%;
+		background-size: auto 100%;
+		width: 1260px;
+		height: 600px;
+	}
+	.characterAnalysisBox2{
+		position: relative;
+		// background-position: left center;
+		background-repeat: no-repeat;
+		background-size: auto 120%;
+		background-position-x: -230px;
+		background-position-y: -100px;
 		width: 1260px;
 		height: 600px;
 	}
