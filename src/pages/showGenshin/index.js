@@ -184,6 +184,9 @@ const Main = () => {
                                                 res.data.data.name = cids[res.data.data.avatarDetail.id].name
                                             }
                                             res.data.data.avatarDetail.weapon.rarity = res.data.data.avatarDetail.weapon.star
+                                            if(!res.data.data.avatarDetail.constellations) {
+                                                res.data.data.avatarDetail.constellations = [1,2,3,4,5,6]
+                                            }
                                         }
                                         setAnalysisCharacter(res.data.data);
                                     }
@@ -519,7 +522,7 @@ const Main = () => {
                                     <div className={styles.characterInfoDiv}>
                                         <div>Lv{analysisCharacter.level||analysisCharacter.avatarDetail.level}</div>
                                         <div>好感:{analysisCharacter.fetter}</div>
-                                        <div>{analysisCharacter.actived_constellation_num}命</div>
+                                        <div>{analysisCharacter.relics.cons}命</div>
                                     </div>
                                 </div>
                                 <div className={styles.skillContainer}>
@@ -547,11 +550,11 @@ const Main = () => {
                                     })}
                                 </div>
                                 <div className={styles.constellationsContainer}>
-                                    {
+                                    {  
                                         analysisCharacter.avatarDetail.constellations?
                                         analysisCharacter.avatarDetail.constellations.map((constellation, i) => {
-                                            return <div key={constellation.id} className={styles.constellationBox + `${constellation.is_actived?" "+styles.constellationBoxActive:""}`}>
-                                                <Image className={styles.constellationIcon} src={constellation.icon} />
+                                            return <div key={constellation.id || (i+1)} className={styles.constellationBox + `${(constellation.is_actived||((i+1)<=analysisCharacter.relics.cons))?" "+styles.constellationBoxActive:""}`}>
+                                                <Image className={styles.constellationIcon} src={constellation.icon||getImgPath(analysisCharacter.name, `cons-${i+1}`)} />
                                             </div>
                                         })
                                         : null
