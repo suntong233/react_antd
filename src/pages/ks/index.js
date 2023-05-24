@@ -53,7 +53,7 @@ const Main = () => {
                             {
                                 Object.values(fightInfo.npcData).map((item,i) => {
                                     return <div key={i}>
-                                        {renderFightCard(item)}
+                                        {renderFightCard(item, true)}
                                     </div>
                                 })
                             }
@@ -132,12 +132,12 @@ function calcHp(hpInfo) {
     }
 }
 
-function renderFightCard(props) {
+function renderFightCard(props, camp2) {
     if(!props || !props.uData){return <></>}
     let {def,taunt,playerCamp,name,key,uData,isUser,head} = props // zb isUser
     let {hp,race,equip,shuxin,skill,cd} = uData // skill cd equip
     return <div className={styles.fightInfoCard}>
-        <div className={styles.fightInfoCardLeftBox}>
+        <div className={styles.fightInfoCardLeftBox + `${camp2? ` ${styles.bgccamp}` : ""}`}>
             <div className={styles.fightInfoCardLeftBoxBaseInfo}>
                 <div className={styles.fightInfoCardLeftBoxBaseInfoHeadIcon}>
                     <img alt="head" src={/http/.test(head)? head: getImgPath(head)}></img>

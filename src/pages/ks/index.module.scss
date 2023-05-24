@@ -42,6 +42,7 @@
 		flex-wrap: wrap;
 		justify-content: flex-start;
 	}
+	
 	.fightInfoCard{
 		margin-left: 5px;
 		margin-top: 5px;
@@ -86,7 +87,9 @@
 			}
 		}
 	}
-	
+	.bgccamp{
+		background-color: rgb(144, 141, 167);
+	}
 	.fightInfoCardLeftBox{
 		flex: 1;
 		background-color: rgb(167, 165, 141);
