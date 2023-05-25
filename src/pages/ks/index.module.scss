@@ -88,12 +88,14 @@
 			}
 		}
 	}
+	.bgccamp1{
+		background-color: rgb(167, 165, 141);
+	}
 	.bgccamp{
 		background-color: rgb(144, 141, 167);
 	}
 	.fightInfoCardLeftBox{
 		flex: 1;
-		background-color: rgb(167, 165, 141);
 		display: flex;
 		flex-direction: column;
 		.fightInfoCardLeftBoxBaseInfo{
