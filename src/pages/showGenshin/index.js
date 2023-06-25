@@ -513,7 +513,7 @@ const Main = () => {
                         <div id="puppeteerScreenShortAnalysis" style={{backgroundImage: `url("${require('../../images/genshin/img/roleDetail/'+(analysisCharacter?.name||'荧')+'1.png')}")`}} className={styles.characterAnalysisContainer}>
                             <div className={styles.characterAnalysisBox1}>
                                 <div style={{backgroundImage: `url("${analysisCharacter.avatarDetail.image|| getImgPath(analysisCharacter.name, "splash")}")`}} className={analysisCharacter.avatarDetail.image? styles.characterAnalysisBox:styles.characterAnalysisBox2}></div>
-                                <div className={styles.logo}>分析出自q群:568756916</div>
+                                <div className={styles.logo}>分析出自q:2654073941</div>
                                 {analysisCharacter.element? <Image className={styles.charactersItemEl2} src={require(`../../images/genshin/${analysisCharacter.element.toLowerCase()}_35.png`)} />: null}
                                 <div className={styles.characterInfoBox}>
                                     <div className={styles.characterInfoName}>
@@ -543,8 +543,8 @@ const Main = () => {
                                     {analysisCharacter.avatarIds.map(aiditem => {
                                         return <div key={aiditem}>
                                             <Image
-                                                alt={cids[aiditem].name}
-                                                src={require(`../../images/genshin/img/side/${cids[aiditem].name}.png`)}
+                                                alt={cids[aiditem]?.name || "未录入"}
+                                                src={require(`../../images/genshin/img/side/${cids[aiditem]?.name || "未录入"}.png`)}
                                             ></Image>
                                         </div>
                                     })}
