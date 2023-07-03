@@ -543,8 +543,8 @@ const Main = () => {
                                     {analysisCharacter.avatarIds.map(aiditem => {
                                         return <div key={aiditem}>
                                             <Image
-                                                alt={cids[aiditem]?.name || "未录入"}
-                                                src={require(`../../images/genshin/img/side/${cids[aiditem]?.name || "未录入"}.png`)}
+                                                alt={cids[aiditem?.name] || "未录入"}
+                                                src={require(`../../images/genshin/img/side/${cids[aiditem?.name] || "未录入"}.png`)}
                                             ></Image>
                                         </div>
                                     })}

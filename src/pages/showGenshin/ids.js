@@ -508,6 +508,10 @@ const cids = {
         "id": "10000078",
         "name": "艾尔海森"
     },
+    "海森": {
+        "id": "10000078",
+        "name": "艾尔海森"
+    },
 }
 
 export default cids
