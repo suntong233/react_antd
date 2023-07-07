@@ -544,7 +544,7 @@ const Main = () => {
                                         return <div key={aiditem}>
                                             <Image
                                                 alt={cids[aiditem?.name] || "未录入"}
-                                                src={require(`../../images/genshin/img/side/${cids[aiditem?.name] || "未录入"}.png`)}
+                                                src={require(`../../images/genshin/img/side/${cids[aiditem]?.name || "未录入"}.png`)}
                                             ></Image>
                                         </div>
                                     })}
